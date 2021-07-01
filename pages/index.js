@@ -1,8 +1,11 @@
+import PropTypes from 'prop-types';
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { findAll } from '../utils/posts';
 
-export default function Home() {
+const Home = ({ posts }) => {
+  console.log(posts);
   return (
     <div className={styles.container}>
       <Head>
@@ -66,4 +69,20 @@ export default function Home() {
       </footer>
     </div>
   )
+};
+
+export async function getStaticProps ({ }) {
+  const posts = await findAll();
+
+  return {
+    props: {
+      posts: JSON.parse(JSON.stringify(posts))
+    }
+  };
 }
+
+Home.propTypes = {
+  posts: PropTypes.array
+};
+
+export default Home;
