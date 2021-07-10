@@ -1,0 +1,45 @@
+@import '../shared/styles/global.scss';
+
+h1 {
+  line-height: 1.4;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight:  900;
+
+  a {
+    color: $color-black;
+    font-weight: inherit;
+  }
+}
+
+blockquote {
+  margin: 0 0 2.5rem 0;
+  border-left: 1px solid $color-gray-light;
+  padding: 1.25rem 2.5rem;
+}
+
+@media (min-width: $break-tablet) {
+  h2 {
+    margin-bottom: 3rem;
+    font-size: 4rem;
+  }
+
+  blockquote {
+    margin-bottom: 3rem;
+    padding: 2.25rem 3.5rem;
+  }
+}
+
+@media (min-width: $break-desktop) {
+  h2 {
+    margin-bottom: 4rem;
+    font-size: 4.5rem;
+  }
+
+  blockquote {
+    margin-bottom: 4rem;
+    padding: 3.25rem 4.5rem;
+  }
+}

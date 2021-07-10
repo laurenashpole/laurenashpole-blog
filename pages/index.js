@@ -1,31 +1,32 @@
 import PropTypes from 'prop-types';
-import Head from 'next/head'
-import Image from 'next/image'
+import { find } from '../utils/posts';
 import Layout from '../components/layout/Layout';
-import styles from '../styles/Home.module.css'
-import { findAll } from '../utils/posts';
+import Posts from '../components/posts/Posts';
 
-const Home = ({ posts }) => {
-  console.log(posts);
+const Index = ({ posts, totalPosts, pagination }) => {
   return (
-    <Layout className={styles.container}>
-      hi
+    <Layout>
+      <Posts posts={posts} totalPosts={totalPosts} pagination={pagination} />
     </Layout>
-  )
+  );
 };
 
-export async function getStaticProps ({ }) {
-  const posts = await findAll();
+export async function getStaticProps () {
+  const response = await find({ limit: 10 }, true);
 
   return {
     props: {
-      posts: JSON.parse(JSON.stringify(posts))
+      posts: JSON.parse(JSON.stringify(response.posts)),
+      totalPosts: response.total_posts,
+      pagination: JSON.parse(JSON.stringify(response._links))
     }
   };
 }
 
-Home.propTypes = {
-  posts: PropTypes.array
+Index.propTypes = {
+  posts: PropTypes.array,
+  totalPosts: PropTypes.number,
+  pagination: PropTypes.object
 };
 
-export default Home;
+export default Index;

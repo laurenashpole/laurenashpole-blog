@@ -1,0 +1,73 @@
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
+import Well from '../../shared/components/Well';
+import PublishDate from './PublishDate';
+import Details from './Details';
+import TextBlock from './TextBlock';
+import MediaBlock from './MediaBlock';
+import LinkBlock from './LinkBlock';
+import styles from './Post.styles.js';
+
+const Post = ({ post, isPermalink }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  const isTablet = useMediaQuery({
+    query: '(min-width: 768px)'
+  });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!post) {
+    return null;
+  }
+
+  return (
+    <article className="post">
+      <div className="post__details">
+        {isMounted && isTablet &&
+          <>
+            <PublishDate date={post.date} />
+            <Details post={post} />
+          </>
+        }
+      </div>
+
+      <div className="post__content">
+        <Well size="custom">
+          {isMounted && !isTablet && <PublishDate date={post.date} />}
+
+          <div className="post__body">
+            {post.type === 'text' && <TextBlock post={post} />}
+            {post.type === 'photo' && <MediaBlock post={post} />}
+            {post.type === 'link' && <LinkBlock post={post} />}
+          </div>
+
+          {isMounted && !isTablet && <Details post={post} />}
+
+          {!isPermalink &&
+            <footer className="post__footer" aria-label="Post footer">
+              <Link href={`/post/${post.id_string}${post.slug ? '/' + post.slug : ''}`}>
+                <a className="post__permalink" data-ga-category="blog footer" data-ga-click="true">Permalink</a>
+              </Link>
+            </footer>
+          }
+        </Well>
+      </div>
+
+      <style jsx global>
+        {styles}
+      </style>
+    </article>
+  );
+};
+
+Post.propTypes = {
+  post: PropTypes.object,
+  isPermalink: PropTypes.bool
+};
+
+export default Post;
