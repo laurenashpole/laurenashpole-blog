@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { find } from '../../../../utils/posts';
+import { find, findAll, getTags } from '../../../../utils/posts';
 import Layout from '../../../../components/layout/Layout';
 import Posts from '../../../../components/posts/Posts';
 
@@ -12,9 +12,23 @@ const Index = ({ posts, totalPosts, pagination, page, tag }) => {
 };
 
 export async function getStaticPaths () {
+  const response = await findAll();
+  const tags = getTags(response.posts, '+');
+
+  const paths = Object.keys(tags).reduce((arr, tag) => {
+    const pages = Array.from(Array(Math.ceil(tags[tag] / 10)).keys());
+
+    return [
+      ...arr,
+      ...(pages.map((i) => {
+        return { params: { tag: tag, page: (i + 1).toString() }};
+      }))
+    ];
+  }, []);
+
   return {
-    paths: [],
-    fallback: true
+    paths: paths,
+    fallback: false
   };
 }
 
@@ -38,7 +52,7 @@ Index.propTypes = {
   totalPosts: PropTypes.number,
   pagination: PropTypes.object,
   tag: PropTypes.string,
-  page: PropTypes.number
+  page: PropTypes.string
 };
 
 export default Index;

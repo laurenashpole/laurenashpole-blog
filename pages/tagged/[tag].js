@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { find } from '../../utils/posts';
+import { find, findAll, getTags } from '../../utils/posts';
 import Layout from '../../components/layout/Layout';
 import Posts from '../../components/posts/Posts';
 
@@ -12,18 +12,14 @@ const Index = ({ posts, totalPosts, pagination, tag }) => {
 };
 
 export async function getStaticPaths () {
-  const response = await find({ limit: 50 });
-
-  const tags = response.posts.reduce((arr, post) => {
-    post.tags.forEach((tag) => !arr.includes(tag) && arr.push(tag));
-    return arr;
-  }, []);
+  const response = await findAll();
+  const tags = getTags(response.posts, '-');
 
   return {
-    paths: tags.map((tag) => {
+    paths: Object.keys(tags).map((tag) => {
       return { params: { tag: tag }};
     }),
-    fallback: true
+    fallback: false
   };
 }
 

@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useMediaQuery } from 'react-responsive';
 import Well from '../../shared/components/Well';
+import Meta from './Meta';
 import PublishDate from './PublishDate';
 import Details from './Details';
 import TextBlock from './TextBlock';
 import MediaBlock from './MediaBlock';
 import LinkBlock from './LinkBlock';
+import Notes from './Notes';
+import Comments from './Comments';
 import styles from './Post.styles.js';
 
 const Post = ({ post, isPermalink }) => {
@@ -21,12 +24,10 @@ const Post = ({ post, isPermalink }) => {
     setIsMounted(true);
   }, []);
 
-  if (!post) {
-    return null;
-  }
-
   return (
     <article className="post">
+      <Meta post={post} />
+
       <div className="post__details">
         {isMounted && isTablet &&
           <>
@@ -43,6 +44,8 @@ const Post = ({ post, isPermalink }) => {
           <div className="post__body">
             {post.type === 'text' && <TextBlock post={post} />}
             {post.type === 'photo' && <MediaBlock post={post} />}
+            {post.type === 'photoset' && <MediaBlock post={post} />}
+            {post.type === 'video' && <MediaBlock post={post} />}
             {post.type === 'link' && <LinkBlock post={post} />}
           </div>
 
@@ -56,6 +59,13 @@ const Post = ({ post, isPermalink }) => {
             </footer>
           }
         </Well>
+
+        {isPermalink &&
+          <>
+            {post.notes && <Notes notes={post.notes} />}
+            <Comments />
+          </>
+        }
       </div>
 
       <style jsx global>

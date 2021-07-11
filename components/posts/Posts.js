@@ -1,12 +1,16 @@
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { InView } from 'react-intersection-observer';
 import Post from '../post/Post';
 import Pagination from './Pagination';
 import styles from './Posts.styles.js';
 
 const Posts = ({ posts, totalPosts, pagination, paginationPath, heading }) => {
-  if (!posts) {
-    return null;
-  }
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = '//laurenashpole.disqus.com/count.js';
+    document.body.appendChild(script);
+  }, [])
 
   return (
     <>

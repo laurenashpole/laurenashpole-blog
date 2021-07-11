@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { HEADER } from '../../constants/header';
+import Meta from './Meta';
 import Header from '../../shared/components/Header';
 import Footer from '../../shared/components/Footer';
 import Mailing from '../../shared/components/Mailing';
@@ -13,6 +14,7 @@ const Layout = ({ children, title, description, canonicalPathname }) => {
         <title>{title ? title + ' - ' : ''}Blog - Lauren Ashpole</title>
       </Head>
 
+      <Meta title={title} description={description} canonicalPathname={canonicalPathname} />
       <Header enableAnalytics={true} {...HEADER} />
       <main className="layout__main">{children}</main>
 

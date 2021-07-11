@@ -14,10 +14,21 @@ h2 {
   }
 }
 
+figure {
+  margin: 0;
+}
+
 blockquote {
   margin: 0 0 2.5rem 0;
   border-left: 1px solid $color-gray-light;
   padding: 1.25rem 2.5rem;
+}
+
+pre {
+  background: #fafafa !important;
+  margin: 2.5rem 0;
+  border-radius: 3px;
+  padding: 1.5rem !important;
 }
 
 @media (min-width: $break-tablet) {
@@ -30,6 +41,11 @@ blockquote {
     margin-bottom: 3rem;
     padding: 2.25rem 3.5rem;
   }
+
+  pre {
+    margin: 3rem 0;
+    padding: 3rem !important;
+  }
 }
 
 @media (min-width: $break-desktop) {
@@ -41,5 +57,9 @@ blockquote {
   blockquote {
     margin-bottom: 4rem;
     padding: 3.25rem 4.5rem;
+  }
+
+  pre {
+    margin: 4rem 0;
   }
 }

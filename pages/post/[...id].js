@@ -1,24 +1,24 @@
 import PropTypes from 'prop-types';
-import { find } from '../../utils/posts';
+import { find, findAll } from '../../utils/posts';
 import Layout from '../../components/layout/Layout';
 import Post from '../../components/post/Post';
 
 const Show = ({ post }) => {
   return (
     <Layout>
-      <Post post={post} />
+      <Post post={post} isPermalink={true} />
     </Layout>
   );
 };
 
 export async function getStaticPaths () {
-  const response = await find({ limit: 50 });
+  const response = await findAll();
 
   return {
     paths: response.posts.map((post) => {
       return { params: { id: [post.id_string, post.slug] }};
     }),
-    fallback: true
+    fallback: false
   };
 }
 

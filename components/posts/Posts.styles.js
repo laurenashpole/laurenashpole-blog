@@ -5,7 +5,7 @@ export default css.global`
   @import 'svgs.scss';
 
   .posts__heading {
-    padding: 2rem;
+    padding: 0 2rem;
     text-align: center;
 
     &:after {

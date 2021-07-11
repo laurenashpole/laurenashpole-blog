@@ -39,7 +39,7 @@ Index.propTypes = {
   posts: PropTypes.array,
   totalPosts: PropTypes.number,
   pagination: PropTypes.object,
-  page: PropTypes.number
+  page: PropTypes.string
 };
 
 export default Index;
