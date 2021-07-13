@@ -13,7 +13,7 @@ import Notes from './Notes';
 import Comments from './Comments';
 import styles from './Post.styles.js';
 
-const Post = ({ post, isPermalink }) => {
+const Post = ({ post, isPermalink, notes }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const isTablet = useMediaQuery({
@@ -54,7 +54,7 @@ const Post = ({ post, isPermalink }) => {
           {!isPermalink &&
             <footer className="post__footer" aria-label="Post footer">
               <Link href={`/post/${post.id_string}${post.slug ? '/' + post.slug : ''}`}>
-                <a className="post__permalink" data-ga-category="blog footer" data-ga-click="true">Permalink</a>
+                <a data-ga-category="blog footer" data-ga-click="true">Permalink</a>
               </Link>
             </footer>
           }
@@ -62,7 +62,7 @@ const Post = ({ post, isPermalink }) => {
 
         {isPermalink &&
           <>
-            {post.notes && <Notes notes={post.notes} />}
+            {notes && <Notes notes={notes} />}
             <Comments />
           </>
         }
@@ -77,7 +77,8 @@ const Post = ({ post, isPermalink }) => {
 
 Post.propTypes = {
   post: PropTypes.object,
-  isPermalink: PropTypes.bool
+  isPermalink: PropTypes.bool,
+  notes: PropTypes.object
 };
 
 export default Post;

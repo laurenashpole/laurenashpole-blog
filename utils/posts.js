@@ -1,6 +1,6 @@
 import { TEST_DATA } from './testData';
 
-const TUMBLR_ENDPOINT = `https://api.tumblr.com/v2/blog/laurenashpole.tumblr.com/posts?api_key=${process.env.TUMBLR_API_KEY}`;
+const TUMBLR_API = 'https://api.tumblr.com/v2/blog/laurenashpole.tumblr.com/';
 
 export async function find (params = {}, canBreak) {
   const response = await fetchResponse(params);
@@ -27,6 +27,13 @@ export async function findAll () {
   return {...response, posts: [...response.posts, ...posts]};
 }
 
+export async function findNotes (params = {}) {
+  const paramsString = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
+  const response = await fetch(`${TUMBLR_API}/notes?api_key=${process.env.TUMBLR_API_KEY}&${paramsString}`);
+  const responseJSON = await response.json();
+  return responseJSON.response;
+}
+
 export function getTags (posts, char) {
   return posts.reduce((obj, post) => {
     post.tags.forEach((tag) => {
@@ -45,7 +52,7 @@ export function getTags (posts, char) {
 
 async function fetchResponse (params = {}) {
   const paramsString = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
-  const response = await fetch(`${TUMBLR_ENDPOINT}&${paramsString}`);
+  const response = await fetch(`${TUMBLR_API}/posts?api_key=${process.env.TUMBLR_API_KEY}&${paramsString}`);
   const responseJSON = await response.json();
   return responseJSON.response;
 }

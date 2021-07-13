@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import { find, findAll } from '../../utils/posts';
+import { find, findAll, findNotes } from '../../utils/posts';
 import Layout from '../../components/layout/Layout';
 import Post from '../../components/post/Post';
 
-const Show = ({ post }) => {
+const Show = ({ post, notes }) => {
   return (
-    <Layout>
-      <Post post={post} isPermalink={true} />
+    <Layout title={post.headline || post.summary || ''}>
+      <Post post={post} isPermalink={true} notes={notes} />
     </Layout>
   );
 };
@@ -23,17 +23,20 @@ export async function getStaticPaths () {
 }
 
 export async function getStaticProps ({ params }) {
-  const response = await find({ id: params.id[0], reblog_info: true, notes_info: true });
+  const response = await find({ id: params.id[0] });
+  const notes = await findNotes({ id: params.id[0], mode: 'all' });
 
   return {
     props: {
-      post: JSON.parse(JSON.stringify(response.posts[0]))
+      post: JSON.parse(JSON.stringify(response.posts[0])),
+      notes: JSON.parse(JSON.stringify(notes))
     }
   };
 }
 
 Show.propTypes = {
-  post: PropTypes.object
+  post: PropTypes.object,
+  notes: PropTypes.object
 };
 
 export default Show;

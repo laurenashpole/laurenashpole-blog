@@ -33,7 +33,7 @@ const Details = ({ post }) => {
         }
 
         <li className="details__item">
-          <Link href={`/post/${post.id_string}${post.slug ? '/' + post.slug : ''}#disqus_thread`}>
+          <Link href={`${post.post_url}#disqus_thread`}>
             <a className="dsq-comment-count disqus-comment-count" data-disqus-url={post.post_url} data-ga-category="blog details" data-ga-click="true">Comments</a>
           </Link>
         </li>

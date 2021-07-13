@@ -29,7 +29,6 @@ export default css.global`
   }
 
   .post__footer {
-    display: flex;
     font-size: 1.75rem;
     text-transform: uppercase;
     letter-spacing: 0.075em;
@@ -82,7 +81,7 @@ export default css.global`
   }
 
   @media (min-width: $break-desktop) {
-    .post {
+    .post:first-child {
       &:not(:last-child) {
         margin-bottom: 12rem;
       } 

@@ -6,13 +6,24 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {!this.props.inAmpMode &&
-            <script dangerouslySetInnerHTML={{ __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${process.env.GTM_CONTAINER_ID}');
-            `}} />
+            <>
+              <script dangerouslySetInnerHTML={{ __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${process.env.GTM_CONTAINER_ID}');
+              `}} />
+
+              <script dangerouslySetInnerHTML={{ __html: `
+                (function () {
+                  var s = document.createElement('script');
+                  s.src = '//laurenashpole.disqus.com/count.js';
+                  s.async = true;
+                  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+              `}} />
+            </>
           }
 
           <meta name="google-site-verification" content="j7rp4JhwKeTvhJYae4BTu4jPAP6ZBahys3beaQ5lGA8" />
@@ -29,10 +40,12 @@ class MyDocument extends Document {
           <NextScript />
 
           {!this.props.inAmpMode &&
-            <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${process.env.GTM_CONTAINER_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
-          }
+            <>
+              <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${process.env.GTM_CONTAINER_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
 
-          <script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js"></script>
+              <script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js" />
+            </>
+          }
         </body>
       </Html>
     );

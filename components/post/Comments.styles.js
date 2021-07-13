@@ -7,4 +7,10 @@ export default css.global`
     text-align: left;
     text-transform: uppercase;
   }
+
+  @media (min-width: $break-tablet) {
+    .well__section:first-child .comments__heading {
+      margin: -1rem 0;
+    }
+  }
 `;

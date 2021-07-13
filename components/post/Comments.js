@@ -5,11 +5,10 @@ import styles from './Comments.styles.js';
 
 const Comments = () => {
   const handleInView = (inView) => {
-    console.log('in view');
-    console.log(inView);
     if (inView) {
       const script = document.createElement('script');
       script.src = '//laurenashpole.disqus.com/embed.js';
+      script.async = true
       document.body.appendChild(script);
     }
   };
@@ -17,7 +16,7 @@ const Comments = () => {
   return (
     <Well size="custom">
       <InView threshold={1} triggerOnce={true} onChange={handleInView}>
-        <h3 class="comments__heading">Comments</h3>
+        <h3 className="comments__heading">Comments</h3>
       </InView>
 
       <>
