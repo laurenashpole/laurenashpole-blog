@@ -16,13 +16,12 @@ const Notes = ({ notes }) => {
         body: JSON.stringify(params)
       });
 
-      console.log(response);
       setParams(response._links.next.query_params);
       setFullNotes([...fullNotes, ...response.notes]);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <>

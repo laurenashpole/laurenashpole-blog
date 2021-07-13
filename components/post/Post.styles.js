@@ -81,7 +81,7 @@ export default css.global`
   }
 
   @media (min-width: $break-desktop) {
-    .post:first-child {
+    .post .well:first-child {
       &:not(:last-child) {
         margin-bottom: 12rem;
       } 

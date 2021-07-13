@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { InView } from 'react-intersection-observer';
 import Post from '../post/Post';
 import Pagination from './Pagination';
 import styles from './Posts.styles.js';

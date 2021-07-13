@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { InView } from 'react-intersection-observer';
 import Well from '../../shared/components/Well';
 import styles from './Comments.styles.js';
@@ -8,7 +7,7 @@ const Comments = () => {
     if (inView) {
       const script = document.createElement('script');
       script.src = '//laurenashpole.disqus.com/embed.js';
-      script.async = true
+      script.async = true;
       document.body.appendChild(script);
     }
   };

@@ -8,7 +8,7 @@ const Index = ({ posts, totalPosts, pagination, tag }) => {
     <Layout>
       <Posts posts={posts} totalPosts={totalPosts} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} heading={`Posts tagged ${tag}`} />
     </Layout>
-  )
+  );
 };
 
 export async function getStaticPaths () {

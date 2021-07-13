@@ -1,5 +1,3 @@
-import { TEST_DATA } from './testData';
-
 const TUMBLR_API = 'https://api.tumblr.com/v2/blog/laurenashpole.tumblr.com/';
 
 export async function find (params = {}, canBreak) {
