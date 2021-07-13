@@ -5,7 +5,7 @@ import Posts from '../../components/posts/Posts';
 
 const Index = ({ posts, totalPosts, pagination, page }) => {
   return (
-    <Layout>
+    <Layout title={`Page ${page}`}>
       <Posts posts={posts} totalPosts={totalPosts} heading={`Page ${page}`} pagination={pagination} />
     </Layout>
   );

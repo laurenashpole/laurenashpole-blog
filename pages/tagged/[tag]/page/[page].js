@@ -5,7 +5,7 @@ import Posts from '../../../../components/posts/Posts';
 
 const Index = ({ posts, totalPosts, pagination, page, tag }) => {
   return (
-    <Layout>
+    <Layout title={`Posts tagged ${tag} – page ${page}` }>
       <Posts posts={posts} totalPosts={totalPosts} heading={`Posts tagged ${tag} <br />– page ${page}`} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} />
     </Layout>
   );
