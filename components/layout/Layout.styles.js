@@ -86,4 +86,16 @@ export default css.global`
       }
     }
   }
+
+  @media (min-width: $break-desktop) {
+    .layout__main:after {
+      background-size: 55rem, 60rem, 20rem, 25rem, 12.5rem;
+      background-position:
+        4.5rem 5rem,
+        calc(100% - 1rem) calc(100% - 3rem),
+        70% calc(100% - 20rem),
+        calc(100% - 1rem) 6rem,
+        1.5rem 45rem;
+    }
+  }
 `;

@@ -37,7 +37,8 @@ module.exports = {
       'error',
       'always'
     ],
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    '@next/next/no-img-element': 'off'
   },
   globals: {
     'React': 'writable'

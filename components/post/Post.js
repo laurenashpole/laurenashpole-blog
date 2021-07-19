@@ -9,6 +9,7 @@ import Details from './Details';
 import TextBlock from './TextBlock';
 import MediaBlock from './MediaBlock';
 import LinkBlock from './LinkBlock';
+import AnswerBlock from './AnswerBlock';
 import Notes from './Notes';
 import Comments from './Comments';
 import styles from './Post.styles.js';
@@ -46,7 +47,9 @@ const Post = ({ post, isPermalink, notes }) => {
             {post.type === 'photo' && <MediaBlock post={post} />}
             {post.type === 'photoset' && <MediaBlock post={post} />}
             {post.type === 'video' && <MediaBlock post={post} />}
+            {post.type === 'audio' && <div />}
             {post.type === 'link' && <LinkBlock post={post} />}
+            {post.type === 'answer' && <AnswerBlock post={post} />}
           </div>
 
           {isMounted && !isTablet && <Details post={post} />}
@@ -62,7 +65,7 @@ const Post = ({ post, isPermalink, notes }) => {
 
         {isPermalink &&
           <>
-            {notes && <Notes notes={notes} />}
+            {(notes || []).length > 1 && <Notes notes={notes} />}
             <Comments />
           </>
         }
