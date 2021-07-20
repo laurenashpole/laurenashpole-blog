@@ -1,4 +1,4 @@
-import { findNotes } from '../../utils/posts';
+import { findNotes } from '../../utils/notes';
 
 export default async function handler (req, res) {
   if (!req.body) {

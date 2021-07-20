@@ -7,7 +7,7 @@ const Details = ({ post }) => {
     <div className="details">
       <ul className="details__list">
         <li className="details__item details__item--em details__item--type">
-          <Link href={`/post/${post.id_string}${post.slug ? '/' + post.slug : ''}`}>
+          <Link href={post.pathname}>
             <a data-ga-category="blog details" data-ga-click="true">{post.type}</a>
           </Link>
         </li>
@@ -23,18 +23,26 @@ const Details = ({ post }) => {
         })}
       </ul>
 
+      {post.reblogged_from_name && post.reblogged_from_url &&
+        <ul className="details__list">
+          <li className="details__item">
+            <a href={post.reblogged_from_url}>Reblogged from {post.reblogged_from_name}</a>
+          </li>
+        </ul>
+      }
+
       <ul className="details__list">
         {post.note_count > 0 &&
           <li className="details__item details__item--em">
-            <Link href={`/post/${post.id_string}${post.slug ? '/' + post.slug : ''}`}>
+            <Link href={post.pathname}>
               <a data-ga-category="blog details" data-ga-click="true">{post.note_count} Note{post.note_count !== 1 ? 's' : ''}</a>
             </Link>
           </li>
         }
 
         <li className="details__item">
-          <Link href={`${post.post_url}#disqus_thread`}>
-            <a className="dsq-comment-count disqus-comment-count" data-disqus-url={post.post_url} data-ga-category="blog details" data-ga-click="true">Comments</a>
+          <Link href={`${post.pathname}#disqus_thread`}>
+            <a className="dsq-comment-count disqus-comment-count" data-disqus-url={post.pathname} data-ga-category="blog details" data-ga-click="true">Comments</a>
           </Link>
         </li>
       </ul>

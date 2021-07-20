@@ -3,29 +3,24 @@ import { find } from '../utils/posts';
 import Layout from '../components/layout/Layout';
 import Posts from '../components/posts/Posts';
 
-const Index = ({ posts, totalPosts, pagination }) => {
+const Index = ({ posts, pagination }) => {
   return (
     <Layout>
-      <Posts posts={posts} totalPosts={totalPosts} pagination={pagination} />
+      <Posts posts={posts} pagination={pagination} />
     </Layout>
   );
 };
 
 export async function getStaticProps () {
-  const response = await find({ limit: 10 }, true);
+  const response = find(10, 1, true);
 
   return {
-    props: {
-      posts: JSON.parse(JSON.stringify(response.posts)),
-      totalPosts: response.total_posts,
-      pagination: JSON.parse(JSON.stringify(response._links))
-    }
+    props: response
   };
 }
 
 Index.propTypes = {
   posts: PropTypes.array,
-  totalPosts: PropTypes.number,
   pagination: PropTypes.object
 };
 

@@ -11,7 +11,9 @@ const Posts = ({ posts, totalPosts, pagination, paginationPath, heading }) => {
         {posts.map((post) => <Post key={post.id} post={post} />)}
       </div>
 
-      <Pagination totalPosts={totalPosts} pagination={pagination} paginationPath={paginationPath} />
+      {pagination &&
+        <Pagination totalPosts={totalPosts} pagination={pagination} paginationPath={paginationPath} />
+      }
 
       <style jsx global>
         {styles}

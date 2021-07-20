@@ -1,58 +1,37 @@
-const TUMBLR_API = 'https://api.tumblr.com/v2/blog/laurenashpole.tumblr.com/';
+import data from '../posts.json';
 
-export async function find (params = {}, canBreak) {
-  const response = await fetchResponse(params);
-
+export function findAll (tags) {
   return {
-    ...response,
-    posts: response.posts.map((post) => {
-      return post.type === 'text' ? parseText(post, canBreak) : post;
-    })
+    posts: data.posts.map((post) => {
+      return { ...post, pathname: new URL(post.post_url).pathname };
+    }),
+    totalPosts: data.total_posts,
+    tags: tags ? getTags(data.posts, tags.char) : []
   };
 }
 
-export async function findAll () {
-  const maxLimit = 50;
-  const response = await fetchResponse({ limit: maxLimit });
-  const pages = Array.from(Array(Math.floor(response.total_posts / maxLimit)).keys());
-
-  const posts = await pages.reduce(async (arr, i) => {
-    const pageResponse = await fetchResponse({ limit: maxLimit, offset: maxLimit * (i + 1) });
-    const promisedArr = await arr;
-    return [...promisedArr, ...pageResponse.posts];
-  }, []);
-
-  return {...response, posts: [...response.posts, ...posts]};
+export function find (limit = 10, page = 1, canBreak) {
+  return parseData(data.posts, limit, page, canBreak);
 }
 
-export async function findNotes (params = {}) {
-  const paramsString = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
-  const response = await fetch(`${TUMBLR_API}/notes?api_key=${process.env.TUMBLR_API_KEY}&${paramsString}`);
-  const responseJSON = await response.json();
-  return responseJSON.response;
+export function findByTag (tag, limit = 10, page = 1, canBreak) {
+  const posts = data.posts.filter((post) => post.tags.indexOf(tag) !== -1);
+  return parseData(posts, limit, page, canBreak);
 }
 
-export function getTags (posts, char) {
-  return posts.reduce((obj, post) => {
-    post.tags.forEach((tag) => {
-      const slug = tag.replace(/ /g, char);
-
-      if (!obj[slug]) {
-        return obj[slug] = 1;
-      }
-
-      obj[slug] = obj[slug] + 1;
-    });
-
-    return obj;
-  }, {});
+export function findById (id) {
+  const posts = data.posts.filter((post) => post.id_string === id);
+  return { post: parseData(posts).posts[0] };
 }
 
-async function fetchResponse (params = {}) {
-  const paramsString = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
-  const response = await fetch(`${TUMBLR_API}/posts?api_key=${process.env.TUMBLR_API_KEY}&${paramsString}`);
-  const responseJSON = await response.json();
-  return responseJSON.response;
+function parseData (posts = [], limit = 10, page = 1, canBreak) {
+  return {
+    posts: posts.slice((page - 1) * limit, page * limit).map((post) => {
+      post.pathname = new URL(post.post_url).pathname;
+      return post.type === 'text' ? parseText(post, canBreak) : post;
+    }),
+    pagination: getPagination(limit, page, data.total_posts)
+  };
 }
 
 function parseText (post, canBreak) {
@@ -85,4 +64,29 @@ function parseBlocks (blocks, startString, endString) {
   });
 
   return updatedBlocks;
+}
+
+function getPagination (limit, page, totalPosts) {
+  const lastPage = Math.ceil(totalPosts / limit);
+
+  return {
+    nextPage: page < lastPage ? page + 1 : null,
+    prevPage: page === 1 ? null : page - 1
+  };
+}
+
+function getTags (posts, char) {
+  return posts.reduce((obj, post) => {
+    post.tags.forEach((tag) => {
+      const slug = tag.replace(/ /g, char);
+
+      if (!obj[slug]) {
+        return obj[slug] = 1;
+      }
+
+      obj[slug] = obj[slug] + 1;
+    });
+
+    return obj;
+  }, {});
 }

@@ -17,7 +17,7 @@ const Meta = ({ post }) => {
         "@type": "Article",
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "${process.env.NEXT_PUBLIC_BASE_URL}/${post.string_id}/${post.slug}"
+          "@id": "${process.env.NEXT_PUBLIC_BASE_URL}${post.pathname}"
         },
         "headline": "${post.summary}",
         "datePublished": "${getFormattedDate(post.date)}",

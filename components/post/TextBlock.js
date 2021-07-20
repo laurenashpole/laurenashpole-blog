@@ -28,7 +28,7 @@ const TextBlock = ({ post }) => {
 
       {post.read_more &&
         <p className="text__more">
-          <Link href={`/post/${post.id_string}${post.slug ? '/' + post.slug : ''}`}>
+          <Link href={post.pathname}>
             <a data-ga-category="blog post" data-ga-click="true">Continue Reading</a>
           </Link>
         </p>

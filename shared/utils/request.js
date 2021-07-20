@@ -7,7 +7,7 @@ export async function request ({ method, body, endpoint }) {
     body: body
   };
 
-  if (!(body instanceof FormData)) {
+  if (body && !(body instanceof FormData)) {
     options.headers = new Headers({
       'Content-Type': 'application/json'
     });

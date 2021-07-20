@@ -1,22 +1,21 @@
 import PropTypes from 'prop-types';
-import { find, findAll, getTags } from '../../utils/posts';
+import { findAll, findByTag } from '../../utils/posts';
 import Layout from '../../components/layout/Layout';
 import Posts from '../../components/posts/Posts';
 
-const Index = ({ posts, totalPosts, pagination, tag }) => {
+const Index = ({ posts, pagination, tag }) => {
   return (
     <Layout title={`Posts tagged ${tag}`}>
-      <Posts posts={posts} totalPosts={totalPosts} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} heading={`Posts tagged ${tag}`} />
+      <Posts posts={posts} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} heading={`Posts tagged ${tag}`} />
     </Layout>
   );
 };
 
 export async function getStaticPaths () {
-  const response = await findAll();
-  const tags = getTags(response.posts, '-');
+  const response = findAll({ char: '-' });
 
   return {
-    paths: Object.keys(tags).map((tag) => {
+    paths: Object.keys(response.tags).map((tag) => {
       return { params: { tag: tag }};
     }),
     fallback: false
@@ -25,21 +24,15 @@ export async function getStaticPaths () {
 
 export async function getStaticProps ({ params }) {
   const tag = params.tag.replace(/-/g, ' ');
-  const response = await find({ limit: 10, tag: tag }, true);
+  const response = findByTag(tag, 10, 1, true);
 
   return {
-    props: {
-      posts: JSON.parse(JSON.stringify(response.posts)),
-      totalPosts: response.total_posts,
-      pagination: JSON.parse(JSON.stringify(response._links)),
-      tag: tag
-    }
+    props: { ...response, tag }
   };
 }
 
 Index.propTypes = {
   posts: PropTypes.array,
-  totalPosts: PropTypes.number,
   pagination: PropTypes.object,
   tag: PropTypes.string
 };

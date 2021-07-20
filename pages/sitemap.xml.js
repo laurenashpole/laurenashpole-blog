@@ -3,11 +3,9 @@ import { findAll } from '../utils/posts';
 const Sitemap = () => {};
 
 export async function getServerSideProps ({ res }) {
-  const response = await findAll();
-
-  const posts = response.posts.map((post) => {
+  const posts = await findAll().posts.map((post) => {
     return {
-      loc: `${process.env.NEXT_PUBLIC_BASE_URL}${post.id_string}${post.slug ? '/' + post.slug : ''}`,
+      loc: `${process.env.NEXT_PUBLIC_BASE_URL}${post.pathname}`,
       lastmod: new Date(post.date).toISOString().substring(0, 10)
     };
   });

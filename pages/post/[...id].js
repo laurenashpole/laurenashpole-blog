@@ -1,42 +1,38 @@
 import PropTypes from 'prop-types';
-import { find, findAll, findNotes } from '../../utils/posts';
+import { findAll, findById } from '../../utils/posts';
 import Layout from '../../components/layout/Layout';
 import Post from '../../components/post/Post';
 
-const Show = ({ post, notes }) => {
+const Show = ({ post }) => {
   return (
     <Layout title={post.headline || post.summary || ''}>
-      <Post post={post} isPermalink={true} notes={notes} />
+      <Post post={post} isPermalink={true} />
     </Layout>
   );
 };
 
 export async function getStaticPaths () {
-  const response = await findAll();
+  const response = findAll();
 
   return {
     paths: response.posts.map((post) => {
-      return { params: { id: [post.id_string, post.slug] }};
+      const params = post.pathname.replace('/post/', '').split('/');
+      return { params: { id: [ params[0] , params[1] || '' ] }};
     }),
     fallback: false
   };
 }
 
 export async function getStaticProps ({ params }) {
-  const response = await find({ id: params.id[0] });
-  const notes = await findNotes({ id: params.id[0], mode: 'all' });
+  const response = findById(params.id[0]);
 
   return {
-    props: {
-      post: JSON.parse(JSON.stringify(response.posts[0])),
-      notes: JSON.parse(JSON.stringify(notes))
-    }
+    props: response
   };
 }
 
 Show.propTypes = {
-  post: PropTypes.object,
-  notes: PropTypes.object
+  post: PropTypes.object
 };
 
 export default Show;
