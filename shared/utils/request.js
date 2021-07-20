@@ -15,10 +15,9 @@ export async function request ({ method, body, endpoint }) {
 
   try {
     const response = await fetch(endpoint, options);
-    const responseJSON = await response.json();
 
     if (response.ok) {
-      return responseJSON;
+      return await response.json();
     }
 
     throw new Error(response.statusText);
