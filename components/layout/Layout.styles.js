@@ -23,7 +23,7 @@ export default css.global`
     &:after {
       content: '';
       background-image:
-        url(abstract-lines($color-pink-encoded)),
+        url(abstract-lines($color-blue-encoded)),
         url(abstract-squiggle($color-green-encoded)),
         url(abstract-dots($color-orange-encoded)),
         url(node-circle()),
@@ -87,9 +87,9 @@ export default css.global`
     }
   }
 
-  @media (min-width: $break-desktop) {
+  @media (min-width: $break-desktop-large) {
     .layout__main:after {
-      background-size: 55rem, 60rem, 20rem, 25rem, 12.5rem;
+      background-size: 55rem, 62.5rem, 20rem, 25rem, 12.5rem;
       background-position:
         4.5rem 5rem,
         calc(100% - 1rem) calc(100% - 3rem),
