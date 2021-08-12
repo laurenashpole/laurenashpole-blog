@@ -30,13 +30,13 @@ export default css.global`
         url(node-square());
       background-position:
         -1.5rem 5rem,
-        calc(100% + 3rem) calc(100% - 3rem),
-        center calc(100% - 20rem);
+        calc(100% + 3rem) calc(100% - 7.5rem),
+        center calc(100% - 12.5rem);
       background-size: 40rem, 45rem, 12.5rem, 0, 0;
       background-repeat: no-repeat;
       width: 100%;
       height: 100%;
-      min-height: $break-tablet;
+      min-height: 640px;
       position: fixed;
       top: 0;
       left: 50%;
@@ -47,7 +47,7 @@ export default css.global`
 
   @media (min-width: 640px) {
     .layout__main:after {
-      background-size: 50rem, 55rem, 15rem, 0, 0;
+      background-size: 50rem, 56rem, 15.5rem, 0, 0;
     }
   }
 
@@ -59,11 +59,12 @@ export default css.global`
       overflow: unset;
 
       &:after {
-        background-size: 50rem, 55rem, 15rem, 0, 12.5rem;
+        min-height: $break-tablet;
+        background-size: 50rem, 56rem, 15.5rem, 0, 12.5rem;
         background-position:
           4.5rem 5rem,
-          calc(100% + 3rem) calc(100% - 3rem),
-          70% calc(100% - 20rem),
+          calc(100% + 3rem) calc(100% - 10rem),
+          70% calc(100% - 17.5rem),
           0,
           -1.5rem 41.5rem;
       }
@@ -76,26 +77,14 @@ export default css.global`
 
       &:after {
         max-width: $width-desktop-wide;
-        background-size: 50rem, 55rem, 15rem, 25rem, 12.5rem;
+        background-size: 55rem, 62rem, 17rem, 25rem, 12.5rem;
         background-position:
           4.5rem 5rem,
-          calc(100% - 1rem) calc(100% - 3rem),
-          70% calc(100% - 20rem),
+          calc(100% - 1rem) calc(100% - 10rem),
+          70% calc(100% - 17.5rem),
           calc(100% - 1rem) 6rem,
-          1.5rem 41.5rem;
+          -1.5rem 41.5rem;
       }
-    }
-  }
-
-  @media (min-width: $break-desktop-large) {
-    .layout__main:after {
-      background-size: 55rem, 62.5rem, 20rem, 25rem, 12.5rem;
-      background-position:
-        4.5rem 5rem,
-        calc(100% - 1rem) calc(100% - 3rem),
-        70% calc(100% - 20rem),
-        calc(100% - 1rem) 6rem,
-        1.5rem 45rem;
     }
   }
 `;
