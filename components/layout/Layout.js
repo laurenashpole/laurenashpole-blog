@@ -14,7 +14,7 @@ const Layout = ({ children, title, description, canonicalPathname }) => {
         <title>{title ? title + ' - ' : ''}Blog - Lauren Ashpole</title>
       </Head>
 
-      <Meta title={title} description={description} canonicalPathname={canonicalPathname} />
+      <Meta title={title} description={description || 'The latest font releases and recommendations. Plus code snippets, bookmarks, and project updates.'} canonicalPathname={canonicalPathname} />
       <Header enableAnalytics={true} {...HEADER} />
       <main className="layout__main">{children}</main>
 

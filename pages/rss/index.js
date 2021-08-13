@@ -8,7 +8,7 @@ export async function getServerSideProps ({ res }) {
 
   const feed = new Feed({
     title: 'Lauren Ashpole',
-    description: 'The fastest way to find out about new fonts, themes, and anything else I’m working on.',
+    description: 'The latest font releases and recommendations. Plus code snippets, bookmarks, and project updates.',
     link: process.env.NEXT_PUBLIC_BASE_URL
   });
 
