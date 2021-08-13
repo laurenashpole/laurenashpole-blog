@@ -23,7 +23,7 @@ export default css.global`
     &:after {
       content: '';
       background-image:
-        url(abstract-lines($color-blue-encoded)),
+        url(abstract-lines($color-pink-encoded)),
         url(abstract-squiggle($color-green-encoded)),
         url(abstract-dots($color-orange-encoded)),
         url(node-circle()),
