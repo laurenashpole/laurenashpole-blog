@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import js from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript';
+import htmlbars from 'react-syntax-highlighter/dist/cjs/languages/hljs/htmlbars';
 import stackoverflowLight from 'react-syntax-highlighter/dist/cjs/styles/hljs/stackoverflow-light';
 import styles from './TextBlock.styles.js';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
+SyntaxHighlighter.registerLanguage('htmlbars', htmlbars);
 
 const TextBlock = ({ post }) => {
   return (
@@ -16,7 +18,7 @@ const TextBlock = ({ post }) => {
         return (
           <div key={i}>
             {block.startsWith('<pre><code') ? (
-              <SyntaxHighlighter language="javascript|html" style={stackoverflowLight}>
+              <SyntaxHighlighter language="javascript|htmlbars" style={stackoverflowLight}>
                 {block.replace('<pre><code>', '').replace('<pre><code class="js">', '').replace('</code></pre>', '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')}
               </SyntaxHighlighter>
             ) : (
