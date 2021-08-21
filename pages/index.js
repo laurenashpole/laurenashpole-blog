@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import { find } from '../utils/posts';
 import Layout from '../components/layout/Layout';
+import Welcome from '../components/posts/Welcome';
 import Posts from '../components/posts/Posts';
 
 const Index = ({ posts, pagination }) => {
   return (
     <Layout>
+      <Welcome />
       <Posts posts={posts} pagination={pagination} />
     </Layout>
   );
