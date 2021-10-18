@@ -14,11 +14,21 @@ export default css.global`
       margin: 0 auto 3rem auto;
     }
 
+    ol,
     ul {
       list-style: disc;
       padding-left: 2rem;
     }
 
+    ol {
+      list-style: number;
+
+      li {
+        padding-left: 0.75rem;
+      }
+    }
+
+    ol:not(:last-child),
     ul:not(:last-child) {
       margin-bottom: 2.5rem;
     }
@@ -44,7 +54,7 @@ export default css.global`
 
       &:not(:last-child) {
         margin-bottom: 8rem;
-      } 
+      }
     }
 
     .post__details {
@@ -62,10 +72,12 @@ export default css.global`
         margin-bottom: 4rem;
       }
 
+      ol,
       ul {
         padding-left: 2.5rem;
       }
 
+      ol:not(:last-child),
       ul:not(:last-child) {
         margin-bottom: 3rem;
       }
@@ -84,7 +96,7 @@ export default css.global`
     .post .well:first-child {
       &:not(:last-child) {
         margin-bottom: 12rem;
-      } 
+      }
 
       .well__section {
         padding-left: 6rem;
@@ -109,6 +121,7 @@ export default css.global`
         margin-bottom: 6rem;
       }
 
+      ol:not(:last-child),
       ul:not(:last-child) {
         margin-bottom: 4rem;
       }

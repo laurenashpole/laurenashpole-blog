@@ -14,15 +14,6 @@ class MyDocument extends Document {
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                 })(window,document,'script','dataLayer','${process.env.GTM_CONTAINER_ID}');
               `}} />
-
-              <script dangerouslySetInnerHTML={{ __html: `
-                (function () {
-                  var s = document.createElement('script');
-                  s.src = '//laurenashpole.disqus.com/count.js';
-                  s.async = true;
-                  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-                }());
-              `}} />
             </>
           }
 
