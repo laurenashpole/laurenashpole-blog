@@ -12,6 +12,10 @@ const Notes = ({ post }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleLoad = async () => {
+    if (!post.note_count) {
+      return;
+    }
+
     try {
       const response = await request({
         endpoint: '/api/notes',
@@ -42,7 +46,7 @@ const Notes = ({ post }) => {
         <ul>
           {notes.map((note, i) => {
             return(
-              <li key={i} className="notes__item"><a href={note.blog_url}>{note.blog_name}</a> {note.type}{note.type === 'reblog' ? 'ge' : ''}d this{note.reblog_parent_blog_name ? ` from ${note.reblog_parent_blog_name}` : ''}</li>
+              <li key={i} className="notes__item"><a href={note.blog_url}>{note.blog_name}</a> {note.type}{note.type === 'reblog' ? 'ge' : ''}{note.type !== 'posted' && 'd'} this{note.reblog_parent_blog_name ? ` from ${note.reblog_parent_blog_name}` : ''}</li>
             );
           })}
         </ul>
