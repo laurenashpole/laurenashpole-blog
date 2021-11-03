@@ -1,12 +1,25 @@
-import { request } from '../shared/utils/request';
+import tumblr from 'tumblr.js';
 
 export async function findNotes (params = {}) {
-  const paramsString = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
+  const client = tumblr.createClient(getAuth());
+  const response = await connect(client, params);
+  return response;
+}
 
-  const response = await request({
-    method: 'GET',
-    endpoint: `https://api.tumblr.com/v2/blog/laurenashpole.tumblr.com/notes?api_key=${process.env.TUMBLR_API_KEY}&${paramsString}`
+function connect (client, params) {
+  return new Promise ((resolve) => {
+    client.getRequest('/v2/blog/laurenashpole.tumblr.com/notes', params, (err, response) => {
+      if (err) return console.log(err);
+      resolve(response);
+    });
   });
+}
 
-  return response.response;
+function getAuth () {
+  return {
+    consumer_key: process.env.TUMBLR_CONSUMER_KEY,
+    consumer_secret: process.env.TUMBLR_CONSUMER_SECRET,
+    token: process.env.TUMBLR_TOKEN,
+    token_secret: process.env.TUMBLR_TOKEN_SECRET
+  };
 }

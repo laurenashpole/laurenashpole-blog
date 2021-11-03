@@ -9,6 +9,7 @@ import styles from './Notes.styles.js';
 const Notes = ({ post }) => {
   const [notes, setNotes] = useState([]);
   const [params, setParams] = useState({ mode: 'all', id: post.id_string });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const handleLoad = async () => {
     try {
@@ -18,18 +19,25 @@ const Notes = ({ post }) => {
       });
 
       setNotes([...notes, ...response.notes]);
-      setParams(response._links.next.query_params);
+      setParams(response._links && response._links.next ? response._links.next.query_params : {});
+      setIsLoaded(true);
     } catch (err) {
       console.log(err);
     }
   };
 
+  if (!isLoaded) {
+    return (
+      <div className="well">
+        <InView threshold={1} triggerOnce={true} onChange={handleLoad} />
+      </div>
+    );
+  }
+
   return (
     <>
       <Well size="custom">
-        <InView threshold={1} triggerOnce={true} onChange={handleLoad}>
-          <h3 className="notes__heading">Notes</h3>
-        </InView>
+        <h3 className="notes__heading">Notes</h3>
 
         <ul>
           {notes.map((note, i) => {
