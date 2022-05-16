@@ -31,7 +31,7 @@ function getPosts (client, limit, offset, id, tag) {
   return new Promise ((resolve) => {
     client.blogPosts('laurenashpole.tumblr.com', { limit, offset, id, tag })
       .then((response) => resolve(response))
-      .catch((err) => console.log(err));
+      .catch((err) => resolve({}));
   });
 }
 

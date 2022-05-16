@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { findAll, findById } from '../../utils/posts';
+import { find } from '../../utils/tumblr';
 import Layout from '../../components/layout/Layout';
 import Post from '../../components/post/Post';
 
@@ -12,22 +12,29 @@ const Show = ({ post }) => {
 };
 
 export async function getStaticPaths () {
-  const response = findAll();
+  const response = await find();
 
   return {
     paths: response.posts.map((post) => {
       const params = post.pathname.replace('/post/', '').split('/');
       return { params: { id: [ params[0] , params[1] || '' ] }};
     }),
-    fallback: false
+    fallback: 'blocking'
   };
 }
 
 export async function getStaticProps ({ params }) {
-  const response = findById(params.id[0]);
+  const response = await find(1, 1, params.id[0]);
+
+  if (!(response.posts || [])[0]) {
+    return { notFound: true };
+  }
 
   return {
-    props: response
+    props: {
+      post: response.posts[0]
+    },
+    revalidate: 604800
   };
 }
 
