@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { findAll, findByTag } from '../../utils/posts';
+import { FEATURED_TAGS } from '../../constants/featuredTags';
+import { find } from '../../utils/tumblr';
 import Layout from '../../components/layout/Layout';
 import Posts from '../../components/posts/Posts';
 
@@ -12,22 +13,25 @@ const Index = ({ posts, pagination, tag }) => {
 };
 
 export async function getStaticPaths () {
-  const response = findAll({ char: '-' });
-
   return {
-    paths: Object.keys(response.tags).map((tag) => {
-      return { params: { tag: tag }};
+    paths: FEATURED_TAGS.map((tag) => {
+      return { params: { tag: tag.slug }};
     }),
-    fallback: false
+    fallback: 'blocking'
   };
 }
 
 export async function getStaticProps ({ params }) {
   const tag = params.tag.replace(/-/g, ' ');
-  const response = findByTag(tag, 10, 1, true);
+  const response = await find(10, 1, null, tag);
+
+  if (!(response.posts || []).length) {
+    return { notFound: true };
+  }
 
   return {
-    props: { ...response, tag }
+    props: { ...response, tag },
+    revalidate: 604800
   };
 }
 
