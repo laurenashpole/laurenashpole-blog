@@ -14,17 +14,17 @@ export async function find (limit = 10, page = 1, id, tag) {
   return parseResponse(response, !id, limit, page);
 }
 
-export async function findAll (limit = 20) {
+export async function findAll (limit = 50) {
   const client = tumblr.createClient(CLIENT);
   const initialResponse = await getPosts(client, limit, 0);
   const totalPages = Math.floor(initialResponse.total_posts / limit);
 
-  const posts = await Array.from(Array(totalPages).keys()).reduce(async (arr, i) => {
+  const posts = await [...Array(totalPages).keys()].reduce(async (arr, i) => {
     const response = await getPosts(client, limit * (i + 1));
     return [ ...(await arr), ...response.posts ];
   }, []);
 
-  return { ...response, posts: [ ...response.posts, ...posts ] };
+  return { ...initialResponse, posts: [ ...initialResponse.posts, ...posts ] };
 }
 
 function getPosts (client, limit, offset, id, tag) {
