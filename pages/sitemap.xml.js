@@ -18,14 +18,12 @@ export async function getServerSideProps ({ res }) {
         <lastmod>${new Date().toISOString().substring(0, 10)}</lastmod>
       </url>
 
-      ${posts.map((post) => {
-        return `
-          <url>
-            <loc>${post.loc}</loc>
-            <lastmod>${post.lastmod}</lastmod>
-          </url>
-        `;
-      }).join('')}
+      ${posts.map((post) => `
+        <url>
+          <loc>${post.loc}</loc>
+          <lastmod>${post.lastmod}</lastmod>
+        </url>
+      `).join('')}
     </urlset>
   `;
 
