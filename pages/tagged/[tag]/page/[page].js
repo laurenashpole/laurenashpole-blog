@@ -28,7 +28,7 @@ export async function getStaticProps ({ params }) {
 
   return {
     props: { ...response, tag, page: params.page },
-    revalidate: 604800
+    revalidate: 3600
   };
 }
 
