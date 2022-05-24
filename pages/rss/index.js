@@ -1,10 +1,10 @@
 import { Feed } from 'feed';
-import { find } from '../../utils/posts';
+import { find } from '../../utils/tumblr';
 
 const Rss = () => {};
 
 export async function getServerSideProps ({ res }) {
-  const response = find(10);
+  const response = await find(10);
 
   const feed = new Feed({
     title: 'Lauren Ashpole',

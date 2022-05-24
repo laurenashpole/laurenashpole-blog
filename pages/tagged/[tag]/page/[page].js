@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { findAll, findByTag } from '../../../../utils/posts';
+import { find } from '../../../../utils/tumblr';
 import Layout from '../../../../components/layout/Layout';
 import Posts from '../../../../components/posts/Posts';
 
@@ -12,31 +12,23 @@ const Index = ({ posts, pagination, page, tag }) => {
 };
 
 export async function getStaticPaths () {
-  const response = findAll({ char: '+' });
-
-  const paths = Object.keys(response.tags).reduce((arr, tag) => {
-    const pages = [...Array(Math.ceil(response.tags[tag] / 10)).keys()];
-
-    return [
-      ...arr,
-      ...(pages.map((i) => {
-        return { params: { tag, page: (i + 1).toString() }};
-      }))
-    ];
-  }, []);
-
   return {
-    paths: paths,
-    fallback: false
+    paths: [],
+    fallback: 'blocking'
   };
 }
 
 export async function getStaticProps ({ params }) {
   const tag = params.tag.replace(/\+/g, ' ');
-  const response = findByTag(tag, 10, parseInt(params.page), true);
+  const response = await find(10, parseInt(params.page), null, tag);
+
+  if (Math.max(response.total_posts / 10) > parseInt(params.page) || !(response.posts || []).length) {
+    return { notFound: true };
+  }
 
   return {
-    props: { ...response, tag, page: params.page }
+    props: { ...response, tag, page: params.page },
+    revalidate: 3600
   };
 }
 

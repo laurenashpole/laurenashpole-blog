@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { find } from '../utils/posts';
+import { find } from '../utils/tumblr';
 import Layout from '../components/layout/Layout';
 import Welcome from '../components/posts/Welcome';
 import Posts from '../components/posts/Posts';
@@ -14,7 +14,7 @@ const Index = ({ posts, pagination }) => {
 };
 
 export async function getStaticProps () {
-  const response = find(10, 1, true);
+  const response = await find();
 
   return {
     props: response

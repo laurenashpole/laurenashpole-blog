@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { findAll, find } from '../../utils/posts';
+import { find } from '../../utils/tumblr';
 import Layout from '../../components/layout/Layout';
 import Posts from '../../components/posts/Posts';
 
@@ -12,22 +12,24 @@ const Index = ({ posts, pagination, page }) => {
 };
 
 export async function getStaticPaths () {
-  const response = findAll();
-  const pages = [...Array(Math.ceil(response.totalPosts / 10)).keys()];
-
   return {
-    paths: pages.map((i) => {
+    paths: [...Array(10).keys()].map((i) => {
       return { params: { page: (i + 1).toString() }};
     }),
-    fallback: false
+    fallback: 'blocking'
   };
 }
 
 export async function getStaticProps ({ params }) {
-  const response = find(10, parseInt(params.page), true);
+  const response = await find(10, parseInt(params.page), null);
+
+  if (Math.max(response.total_posts / 10) > parseInt(params.page) || !(response.posts || []).length) {
+    return { notFound: true };
+  }
 
   return {
-    props: { ...response, page: params.page }
+    props: { ...response, page: params.page },
+    revalidate: 3600
   };
 }
 
