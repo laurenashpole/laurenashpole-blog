@@ -17,7 +17,8 @@ export async function getStaticProps () {
   const response = await find();
 
   return {
-    props: response
+    props: response,
+    revalidate: 3600
   };
 }
 

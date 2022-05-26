@@ -12,7 +12,7 @@ const Show = ({ post }) => {
 };
 
 export async function getStaticPaths () {
-  const response = await find();
+  const response = await find(20);
 
   return {
     paths: response.posts.map((post) => {
