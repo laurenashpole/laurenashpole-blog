@@ -15,7 +15,7 @@ export async function getServerSideProps ({ res }) {
   response.posts.forEach((post) => {
     feed.addItem({
       title: post.title || post.summary,
-      description: `${post.type === 'photo' ? post.photos.map((photo) => `<img src=${photo.original_size.url} /><br /><br />`) : ''}${post.type === 'video' ? `<iframe width="700" height="383" src="https://www.youtube.com/embed/${post.video.youtube.video_id}" frameborder="0" /><br /><br />` : ''}${post.type === 'link' ? `<a href=${post.url}>${post.title}</a>:` : ''}${post.type === 'answer' ? `${post.question}:` : ''}${post.trail[0].content_raw}`,
+      description: `${post.type === 'photo' ? post.photos.map((photo) => `<img src=${photo.original_size.url} /><br /><br />`) : ''}${post.type === 'video' ? `<iframe width="700" height="383" src="https://www.youtube.com/embed/${post.video.youtube.video_id}" frameborder="0" /><br /><br />` : ''}${post.type === 'link' ? `<a href=${post.url}>${post.title}</a>: ` : ''}${post.type === 'answer' ? `${post.question}: ` : ''}${post.trail[0].content_raw}`,
       link: `${process.env.NEXT_PUBLIC_BASE_URL}${post.pathname}`,
       pubDate: new Date(post.date).toISOString().substring(0, 10),
       category: post.tags.map((tag) => { return { name: tag }; })

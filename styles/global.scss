@@ -58,6 +58,12 @@ hr {
     margin: 3rem 0;
     padding: 3rem !important;
   }
+
+  .well__section:first-child .post__body h3 {
+    font-size: 3.5rem;
+    margin-bottom: 3.5rem;
+    text-align: left;
+  }
 }
 
 @media (min-width: $break-desktop) {
@@ -81,5 +87,10 @@ hr {
 
   hr {
     margin: 7rem 0 6rem 0;
+  }
+
+  .well__section:first-child .post__body h3 {
+    font-size: 4rem;
+    margin-bottom: 4rem;
   }
 }
