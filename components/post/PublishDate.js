@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import styles from './PublishDate.styles.js';
 
-const PublishDate = ({ date }) => {  
+const PublishDate = ({ date }) => {
   return (
     <div className="date">
-      {new Date(date).toLocaleDateString('en-US', {
+      {new Date(date.replace(/-/g, '/')).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric'
