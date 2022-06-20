@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useMediaQuery } from 'react-responsive';
 import Well from '../../shared/components/Well';
-import Meta from './Meta';
 import PublishDate from './PublishDate';
 import Details from './Details';
 import TextBlock from './TextBlock';
@@ -27,8 +26,6 @@ const Post = ({ post, isPermalink }) => {
 
   return (
     <article className="post">
-      <Meta post={post} />
-
       <div className="post__details">
         {isMounted && isTablet &&
           <>
