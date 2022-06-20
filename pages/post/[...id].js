@@ -5,7 +5,7 @@ import Post from '../../components/post/Post';
 
 const Show = ({ post }) => {
   return (
-    <Layout title={post.headline || post.summary || ''}>
+    <Layout title={post.headline || post.summary || ''} canonicalPathname={post.pathname}>
       <Post post={post} isPermalink={true} />
     </Layout>
   );
