@@ -71,10 +71,10 @@ export default async function handler (req, res) {
     </html>
   `;
 
-  // if (process.env.NODE_ENV === 'development') {
-  //   res.setHeader('Content-Type', 'text/html');
-  //   return res.end(html);
-  // }
+  if (process.env.NODE_ENV === 'development') {
+    res.setHeader('Content-Type', 'text/html');
+    return res.end(html);
+  }
 
   const browser = await playwright.launchChromium({ headless: true });
   const page = await browser.newPage();
