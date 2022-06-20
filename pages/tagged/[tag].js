@@ -6,7 +6,7 @@ import Posts from '../../components/posts/Posts';
 
 const Index = ({ posts, pagination, tag }) => {
   return (
-    <Layout title={`Posts tagged ${tag}`}>
+    <Layout meta={{ title: `Posts tagged ${tag}`, pathname: `/tagged/${(tag || '').replace(/ /g, '-')}` }}>
       <Posts posts={posts} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} heading={`Posts tagged ${tag}`} />
     </Layout>
   );

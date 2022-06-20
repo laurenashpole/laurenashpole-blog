@@ -7,14 +7,14 @@ import Footer from '../../shared/components/Footer';
 import Mailing from '../../shared/components/Mailing';
 import styles from './Layout.styles.js';
 
-const Layout = ({ children, title, description, canonicalPathname }) => {
+const Layout = ({ children, meta }) => {
   return (
     <div className="layout">
       <Head>
-        <title>{title ? title + ' - ' : ''}Blog - Lauren Ashpole</title>
+        <title>{(meta || {}).title ? meta.title + ' - ' : ''}Blog - Lauren Ashpole</title>
       </Head>
 
-      <Meta title={title} description={description || 'The latest font releases and recommendations. Plus code snippets, bookmarks, and project updates.'} canonicalPathname={canonicalPathname} />
+      <Meta {...meta} description={(meta || {}).description || 'The latest font releases and recommendations. Plus code snippets, bookmarks, and project updates.'} />
       <Header enableAnalytics={true} {...HEADER} />
       <main className="layout__main">{children}</main>
 
@@ -31,9 +31,7 @@ const Layout = ({ children, title, description, canonicalPathname }) => {
 
 Layout.propTypes = {
   children: PropTypes.any,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  canonicalPathname: PropTypes.string
+  meta: PropTypes.object
 };
 
 export default Layout;
