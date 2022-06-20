@@ -5,6 +5,8 @@ export default async function handler (req, res) {
     return res.status(422).json({});
   }
 
+  console.log(playwright);
+
   res.json({
     headline: req.query.headline,
     type: req.query.type
