@@ -23,12 +23,16 @@ const Show = ({ post }) => {
       "dateModified": "${formattedDate}",
       "author": {
         "@type": "Person",
-        "name": "Lauren Ashpole"
+        "name": "Lauren Ashpole",
+        "url": "https://laurenashpole.com"
       },
       "publisher": {
         "@type": "Organization",
         "name": "Lauren Ashpole"
-      }
+      },
+      "image": [
+        "${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image?headline=${post.headline || post.summary}&type=${post.type}"
+      ]
     }
   `;
 
