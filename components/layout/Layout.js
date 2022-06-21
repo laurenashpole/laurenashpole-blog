@@ -14,7 +14,7 @@ const Layout = ({ children, meta }) => {
         <title>{(meta || {}).title ? meta.title + ' - ' : ''}Blog - Lauren Ashpole</title>
       </Head>
 
-      <Meta {...meta} description={(meta || {}).description || 'The latest font releases and recommendations. Plus code snippets, bookmarks, and project updates.'} />
+      <Meta {...(meta || {})} description={(meta || {}).description || 'The latest font releases and recommendations. Plus code snippets, bookmarks, and project updates.'} />
       <Header enableAnalytics={true} {...HEADER} />
       <main className="layout__main">{children}</main>
 
