@@ -26,7 +26,7 @@ export default async function handler (req, res) {
           .og {
             background: #fff;
             min-height: calc(100% - 8rem);
-            padding: 4rem;
+            padding: 6rem;
             border-radius: 1rem;
             display: flex;
             flex-direction: column;
@@ -54,8 +54,8 @@ export default async function handler (req, res) {
           }
 
           .og__headline {
-            margin-bottom: 0;
-            font-size: 6rem;
+            margin: 2rem 0 0 0;
+            font-size: 6.5rem;
             font-weight: 900;
           }
         </style>

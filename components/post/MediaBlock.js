@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import styles from './MediaBlock.styles.js';
 
 const MediaBlock = ({ post }) => {
+  const comment = post.caption.startsWith('<!--') ? post.caption.split("--")[1] : "";
+
   return (
     <div className="media">
       {post.photos &&
@@ -9,7 +11,7 @@ const MediaBlock = ({ post }) => {
           {post.photos.map((photo, i) => {
             return (
               <div key={i}>
-                <img alt="" src={photo.original_size.url} />
+                <img alt={comment} src={photo.alt_sizes[0] ? photo.alt_sizes[0].url : photo.original_size.url} />
                 <div dangerouslySetInnerHTML={{ __html: photo.caption }} />
               </div>
             );

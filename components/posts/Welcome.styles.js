@@ -22,8 +22,8 @@ export default css.global`
   }
 
   p.welcome__text {
-    max-width: 36rem;
-    margin: 0 auto 2rem auto;
+    max-width: 64rem;
+    margin: 0 auto 3rem auto;
     font-size: 2.15rem;
   }
 
@@ -48,7 +48,7 @@ export default css.global`
     }
 
     p.welcome__text {
-      margin: 0 0 3.5rem 0;
+      margin: 0 0 5rem 0;
       font-size: 2.25rem;
     }
   }
