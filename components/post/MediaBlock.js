@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './MediaBlock.styles.js';
 
 const MediaBlock = ({ post }) => {
-  const comment = post.caption.startsWith('<!--') ? post.caption.split("--")[1] : "";
+  const comment = post.caption.startsWith('<!--') ? post.caption.split('--')[1] : '';
 
   return (
     <div className="media">
