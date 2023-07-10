@@ -86,5 +86,6 @@ export default async function handler (req, res) {
 
   res.setHeader('Cache-Control', 's-maxage=31536000, stale-while-revalidate');
   res.setHeader('Content-Type', 'image/png');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
   res.end(img);
 }
