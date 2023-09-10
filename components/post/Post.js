@@ -40,13 +40,13 @@ const Post = ({ post, isPermalink }) => {
           {isMounted && !isTablet && <PublishDate date={post.date} />}
 
           <div className="post__body">
-            {post.type === 'text' && <TextBlock post={post} />}
-            {post.type === 'photo' && <MediaBlock post={post} />}
-            {post.type === 'photoset' && <MediaBlock post={post} />}
-            {post.type === 'video' && <MediaBlock post={post} />}
-            {post.type === 'audio' && <div />}
+            {/*{post.type === 'text' && <TextBlock post={post} />}*/}
+            {/*{post.type === 'photo' && <MediaBlock post={post} />}*/}
+            {/*{post.type === 'photoset' && <MediaBlock post={post} />}*/}
+            {/*{post.type === 'video' && <MediaBlock post={post} />}*/}
+            {/*{post.type === 'audio' && <div />}*/}
             {post.type === 'link' && <LinkBlock post={post} />}
-            {post.type === 'answer' && <AnswerBlock post={post} />}
+            {/*{post.type === 'answer' && <AnswerBlock post={post} />}*/}
           </div>
 
           {isMounted && !isTablet && <Details post={post} />}
@@ -62,7 +62,7 @@ const Post = ({ post, isPermalink }) => {
 
         {isPermalink &&
           <>
-            {post.note_count > 0 && <Notes post={post} />}
+            {/*{post.note_count > 0 && <Notes post={post} />}*/}
             <Comments />
           </>
         }

@@ -20,7 +20,7 @@ export async function findAll (limit = 50) {
   const totalPages = Math.floor(initialResponse.total_posts / limit);
 
   const posts = await [...Array(totalPages).keys()].reduce(async (arr, i) => {
-    const response = await getPosts(client, limit * (i + 1));
+    const response = await getPosts(client, limit, limit * (i + 1));
     return [ ...(await arr), ...response.posts ];
   }, []);
 
