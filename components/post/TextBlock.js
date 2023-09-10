@@ -13,17 +13,21 @@ const TextBlock = ({ post }) => {
       <h2>{post.title}</h2>
 
       {post.body.map((block, i) => {
-        return (
-          <div key={i}>
-            {block.startsWith('<pre><code') ? (
-              <SyntaxHighlighter language="jsx" style={prism}>
-                {block.replace('<pre><code>', '').replace('<pre><code class="js">', '').replace('</code></pre>', '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')}
-              </SyntaxHighlighter>
-            ) : (
-              <div dangerouslySetInnerHTML={{ __html: block }} />
-            )}
-          </div>
-        );
+        if (block._type === 'block') {
+          return <p key={block._key} dangerouslySetInnerHTML={{ __html: block.children[0].text }} />;
+        }
+
+        if (block._type === 'image' && block.image) {
+          return <img key={block._key} alt={block.image.alt || null} src={block.image.url} />;
+        }
+
+        if (block._type === 'code') {
+          return (
+            <SyntaxHighlighter key={block._key} language="jsx" style={prism}>
+              {block.code}
+            </SyntaxHighlighter>
+          );
+        }
       })}
 
       {post.read_more &&

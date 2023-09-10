@@ -40,7 +40,7 @@ const Post = ({ post, isPermalink }) => {
           {isMounted && !isTablet && <PublishDate date={post.date} />}
 
           <div className="post__body">
-            {/*{post.type === 'text' && <TextBlock post={post} />}*/}
+            {post.type === 'text' && <TextBlock post={post} />}
             {post.type === 'photo' && <MediaBlock post={post} />}
             {/*{post.type === 'photoset' && <MediaBlock post={post} />}*/}
             {/*{post.type === 'video' && <MediaBlock post={post} />}*/}
