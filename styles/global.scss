@@ -27,7 +27,7 @@ blockquote {
 
 pre {
   background: #fafafa !important;
-  margin: 2.5rem 0;
+  margin: 2.5rem 0 !important;
   border-radius: 3px;
   padding: 1.5rem !important;
   font-size: 2rem !important;
@@ -55,7 +55,7 @@ hr {
   }
 
   pre {
-    margin: 3rem 0;
+    margin: 3rem 0 !important;
     padding: 3rem !important;
   }
 
@@ -82,7 +82,7 @@ hr {
   }
 
   pre {
-    margin: 4rem 0;
+    margin: 4rem 0 !important;
   }
 
   hr {

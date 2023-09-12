@@ -8,6 +8,7 @@ import styles from './TextBlock.styles.js';
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
 const TextBlock = ({ post }) => {
+  console.log(post);
   return (
     <div className="text">
       <h2>{post.title}</h2>
