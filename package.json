@@ -10,6 +10,7 @@
     "writePosts": "node ./utils/writePosts"
   },
   "dependencies": {
+    "@portabletext/react": "^3.0.7",
     "@styled-jsx/plugin-sass": "^4.1.0",
     "eslint-plugin-react": "^7.21.4",
     "feed": "^4.2.2",

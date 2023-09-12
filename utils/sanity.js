@@ -34,7 +34,10 @@ function getQuery (limit = 10, page = 1, id, tag) {
       "image": {
         "url": asset->url,
         alt
-      }
+      },
+      markDefs,
+      listItem,
+      level
     }
   }`;
 }

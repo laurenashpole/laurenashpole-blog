@@ -28,6 +28,10 @@ export default css.global`
       }
     }
 
+    li > ul {
+      margin-top: 1.25rem;
+    }
+
     ol:not(:last-child),
     ul:not(:last-child) {
       margin-bottom: 2.5rem;

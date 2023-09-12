@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { PortableText } from '@portabletext/react';
 import Link from 'next/link';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
@@ -7,13 +8,47 @@ import styles from './TextBlock.styles.js';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
+const components = {
+  block: {
+    h3: ({ children }) => <h3>{children}</h3>,
+    normal: ({ children }) => (
+      <p dangerouslySetInnerHTML={{ __html: children.filter((child) => {
+        return child !== '' && typeof child === 'string';
+        // return child;
+      })}} />
+    )
+  },
+  listItem: {
+    bullet: ({ children }) => (
+      <>{children[1] ? <li>{children}</li> : <li dangerouslySetInnerHTML={{ __html: children }} />}</>
+    )
+  },
+  marks: {
+    link: ({ children, value }) => (
+      <a href={value.href} target={value.blank ? '_blank' : null} rel={value.blank ? 'noreferrer noopener' : null}>
+        {children}
+      </a>
+    )
+  },
+  types: {
+    image: ({ value }) => <img alt={value.image.alt || null} src={value.image.url} />,
+    code: ({ value }) => (
+      <SyntaxHighlighter language="jsx" style={prism}>
+        {value.code}
+      </SyntaxHighlighter>
+    ),
+  }
+}
+
 const TextBlock = ({ post }) => {
   console.log(post);
   return (
     <div className="text">
       <h2>{post.title}</h2>
 
-      {post.body.map((block, i) => {
+      <PortableText value={post.body} components={components} />
+
+      {/*{post.body.map((block, i) => {
         if (block._type === 'block') {
           return <p key={block._key} dangerouslySetInnerHTML={{ __html: block.children[0].text }} />;
         }
@@ -29,7 +64,7 @@ const TextBlock = ({ post }) => {
             </SyntaxHighlighter>
           );
         }
-      })}
+      })}*/}
 
       {post.read_more &&
         <p className="text__more">
