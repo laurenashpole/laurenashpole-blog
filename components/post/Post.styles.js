@@ -18,6 +18,10 @@ export default css.global`
       margin-bottom: 3rem;
     }
 
+    img + img {
+      margin-top: -2rem;
+    }
+
     p + img {
       margin-top: 3rem;
     }
@@ -84,6 +88,10 @@ export default css.global`
         margin-bottom: 4rem;
       }
 
+      img + img {
+        margin-top: -3rem;
+      }
+
       p + img {
         margin-top: 4rem;
       }
@@ -131,6 +139,10 @@ export default css.global`
     .post__body {
       img:not(:last-child) {
         margin-bottom: 6rem;
+      }
+
+      img + img {
+        margin-top: -5rem;
       }
 
       p + img {
