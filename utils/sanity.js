@@ -4,7 +4,7 @@ import { decode } from 'html-entities';
 import Prism from 'prismjs';
 
 const client = createClient({
-  projectId: 'm9nd93xl',
+  projectId: process.env.SANITY_PROJECT,
   dataset: 'production',
   apiVersion: '2022-03-25',
   useCdn: false
