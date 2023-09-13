@@ -1,4 +1,7 @@
 import { createClient } from 'next-sanity';
+import { toHTML } from '@portabletext/to-html';
+import { decode } from 'html-entities';
+import Prism from 'prismjs';
 
 const client = createClient({
   projectId: 'm9nd93xl',
@@ -31,6 +34,7 @@ function getQuery (limit = 10, page = 1, id, tag) {
       style,
       children,
       code,
+      language,
       "image": {
         "url": asset->url,
         alt
@@ -42,9 +46,32 @@ function getQuery (limit = 10, page = 1, id, tag) {
   }`;
 }
 
+function getHtml (body) {
+  return toHTML(body, {
+    components: {
+      block: {
+        h3: ({ children }) => `<h3>${children}</h3>`,
+        normal: ({ children }) => children ? `<p>${decode(children)}</p>` : ''
+      },
+      listItem: {
+        bullet: ({ children }) => `<li>${decode(children)}</li>`
+      },
+      marks: {
+        internalLink: ({ children, value }) => `<a href="${value.href}"${value.blank ? ' target="_blank" rel="noreferrer noopener"' : ''}>${children}</a>`,
+        link: ({ children, value }) => `<a href="${value.href}"${value.blank ? ' target="_blank" rel="noreferrer noopener"' : ''}>${children}</a>`
+      },
+      types: {
+        code: ({ value }) => `<pre><code class="${value.language || 'javascript'}">${Prism.highlight(value.code, Prism.languages[value.language || 'javascript'], value.language || 'javascript')}</code></pre>`,
+        image: ({ value }) => `<img${value.image.alt ? ` alt="${value.image.alt}"` : ''} src="${value.image.url}" />`,
+      }
+    }
+  });
+}
+
 async function getPosts (limit = 10, page = 1, id, tag) {
   return (await client.fetch(getQuery(limit, page, id, tag))).map((post) => ({
     ...post,
+    html: getHtml(post.body),
     pathname: `${post.pathname}${post.slug ? `/${post.slug}` : ''}`
   }));
 }

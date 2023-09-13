@@ -26,11 +26,12 @@ blockquote {
 }
 
 pre {
-  background: #fafafa !important;
-  margin: 3.5rem 0 !important;
+  background: #fafafa;
+  margin: 3.5rem 0;
   border-radius: 3px;
-  padding: 1.5rem !important;
-  font-size: 2rem !important;
+  padding: 1.5rem;
+  font-size: 2rem;
+  overflow: auto;
 }
 
 hr {
@@ -55,8 +56,8 @@ hr {
   }
 
   pre {
-    margin: 4rem 0 !important;
-    padding: 3rem !important;
+    margin: 4rem 0;
+    padding: 3rem;
   }
 
   .well__section:first-child .post__body h3 {
@@ -82,7 +83,7 @@ hr {
   }
 
   pre {
-    margin: 5rem 0 !important;
+    margin: 5rem 0;
   }
 
   hr {

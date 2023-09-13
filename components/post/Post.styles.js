@@ -14,6 +14,10 @@ export default css.global`
       margin: 0 auto 3rem auto;
     }
 
+    p + img {
+      margin-top: 3rem;
+    }
+
     ol,
     ul {
       list-style: disc;
@@ -76,6 +80,10 @@ export default css.global`
         margin-bottom: 4rem;
       }
 
+      p + img {
+        margin-top: 4rem;
+      }
+
       ol,
       ul {
         padding-left: 2.5rem;
@@ -119,6 +127,10 @@ export default css.global`
     .post__body {
       img {
         margin-bottom: 6rem;
+      }
+
+      p + img {
+        margin-top: 6rem;
       }
 
       h2 {
