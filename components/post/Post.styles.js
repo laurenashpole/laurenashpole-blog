@@ -11,7 +11,11 @@ export default css.global`
     padding-bottom: 1rem;
 
     img {
-      margin: 0 auto 3rem auto;
+      margin: 0 auto;
+    }
+
+    img:not(:last-child) {
+      margin-bottom: 3rem;
     }
 
     p + img {
@@ -76,7 +80,7 @@ export default css.global`
     }
 
     .post__body {
-      img {
+      img:not(:last-child) {
         margin-bottom: 4rem;
       }
 
@@ -125,7 +129,7 @@ export default css.global`
     }
 
     .post__body {
-      img {
+      img:not(:last-child) {
         margin-bottom: 6rem;
       }
 

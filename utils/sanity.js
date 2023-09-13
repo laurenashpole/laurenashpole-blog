@@ -77,7 +77,7 @@ async function getPosts (limit, page, id, tag) {
   }));
 }
 
-export async function find (limit = 10, page = 2, id, tag) {
+export async function find (limit = 10, page = 3, id, tag) {
   return {
     posts: await getPosts(limit, page, id, tag)
   };
