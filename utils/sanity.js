@@ -10,7 +10,7 @@ const client = createClient({
   useCdn: false
 });
 
-function getQuery (limit = 10, page = 1, id, tag) {
+function getQuery (limit, page, id, tag) {
   return `*[_type == 'post' && type == 'text' ${id ? ` && _id == '${id}'` : ''} ${tag ? ` && tag == '${tag}'` : ''}] | order(date desc) [${limit * (page - 1)}...${limit * page}] {
     _id,
     type,
@@ -54,7 +54,8 @@ function getHtml (body) {
         normal: ({ children }) => children ? `<p>${decode(children)}</p>` : ''
       },
       listItem: {
-        bullet: ({ children }) => `<li>${decode(children)}</li>`
+        bullet: ({ children }) => `<li>${decode(children)}</li>`,
+        number: ({ children }) => `<li>${decode(children)}</li>`
       },
       marks: {
         internalLink: ({ children, value }) => `<a href="${value.href}"${value.blank ? ' target="_blank" rel="noreferrer noopener"' : ''}>${children}</a>`,
@@ -68,7 +69,7 @@ function getHtml (body) {
   });
 }
 
-async function getPosts (limit = 10, page = 1, id, tag) {
+async function getPosts (limit, page, id, tag) {
   return (await client.fetch(getQuery(limit, page, id, tag))).map((post) => ({
     ...post,
     html: getHtml(post.body),
@@ -76,7 +77,7 @@ async function getPosts (limit = 10, page = 1, id, tag) {
   }));
 }
 
-export async function find (limit = 10, page = 1, id, tag) {
+export async function find (limit = 10, page = 2, id, tag) {
   return {
     posts: await getPosts(limit, page, id, tag)
   };
