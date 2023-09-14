@@ -149,7 +149,7 @@ export default css.global`
         margin-top: 6rem;
       }
 
-      h2 {
+      h2:not(:last-child) {
         margin-bottom: 6rem;
       }
 

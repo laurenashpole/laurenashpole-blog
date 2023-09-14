@@ -5,7 +5,7 @@ const MediaBlock = ({ post }) => {
   return (
     <div className="media">
       {post.photos &&
-        <div className="media__content">
+        <div className="media__content media__content--img">
           {post.photos.map((photo, i) => {
             return (
               <div key={i}>

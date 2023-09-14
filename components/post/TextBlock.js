@@ -4,13 +4,12 @@ import styles from './TextBlock.styles.js';
 import 'prismjs/themes/prism.css';
 
 const TextBlock = ({ post }) => {
-  console.log(post.html);
   return (
     <div className="text">
       <h2>{post.title}</h2>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <div dangerouslySetInnerHTML={{ __html: post.preview || post.html }} />
 
-      {post.read_more &&
+      {post.preview &&
         <p className="text__more">
           <Link href={post.pathname}>
             <a data-ga-category="blog post" data-ga-click="true">Continue Reading</a>

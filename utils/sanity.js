@@ -11,7 +11,7 @@ const client = createClient({
 });
 
 function getQuery (limit, page, id, tag) {
-  return `*[_type == 'post' && type == 'photo' ${id ? ` && _id == '${id}'` : ''} ${tag ? ` && tag == '${tag}'` : ''}] | order(date desc) [${limit * (page - 1)}...${limit * page}] {
+  return `*[_type == 'post'${id ? ` && _id == '${id}'` : ''} ${tag ? ` && tag == '${tag}'` : ''}] | order(date desc) [${limit * (page - 1)}...${limit * page}] {
     _id,
     type,
     title,
@@ -76,19 +76,37 @@ function getHtml (body) {
   });
 }
 
-async function getPosts (limit, page, id, tag) {
-  const total = await client.fetch(`count(*[_type == 'post'])`);
-  console.log("TOTAL", total);
+function getPreview (html) {
+  const blocks = html.split('<!-- more -->');
+  return blocks.length > 1 ? blocks[0] : null;
+}
 
-  return (await client.fetch(getQuery(limit, page, id, tag))).map((post) => ({
-    ...post,
-    html: getHtml(post.body),
-    pathname: `${post.pathname}${post.slug ? `/${post.slug}` : ''}`
-  }));
+async function getPagination (limit, page) {
+  const totalPosts = await client.fetch(`count(*[_type == 'post'])`);
+  const lastPage = Math.ceil(totalPosts / limit);
+
+  return {
+    nextPage: page < lastPage ? page + 1 : null,
+    prevPage: page === 1 ? null : page - 1
+  };
+}
+
+async function getPosts (limit, page, id, tag) {
+  return (await client.fetch(getQuery(limit, page, id, tag))).map((post) => {
+    const html = getHtml(post.body);
+
+    return {
+      ...post,
+      html,
+      preview: id ? null : getPreview(html),
+      pathname: `${post.pathname}${post.slug ? `/${post.slug}` : ''}`
+    };
+  });
 }
 
 export async function find (limit = 10, page = 1, id, tag) {
   return {
-    posts: await getPosts(limit, page, id, tag)
+    posts: await getPosts(limit, page, id, tag),
+    pagination: await getPagination(limit, page)
   };
 }
