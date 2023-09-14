@@ -14,6 +14,7 @@ import Comments from './Comments';
 import styles from './Post.styles.js';
 
 const Post = ({ post, isPermalink }) => {
+  // console.log(post);
   const [isMounted, setIsMounted] = useState(false);
 
   const isTablet = useMediaQuery({
@@ -43,10 +44,10 @@ const Post = ({ post, isPermalink }) => {
             {post.type === 'text' && <TextBlock post={post} />}
             {post.type === 'photo' && <MediaBlock post={post} />}
             {/*{post.type === 'photoset' && <MediaBlock post={post} />}*/}
-            {/*{post.type === 'video' && <MediaBlock post={post} />}*/}
+            {post.type === 'video' && <MediaBlock post={post} />}
             {/*{post.type === 'audio' && <div />}*/}
             {post.type === 'link' && <LinkBlock post={post} />}
-            {/*{post.type === 'answer' && <AnswerBlock post={post} />}*/}
+            {post.type === 'answer' && <AnswerBlock post={post} />}
           </div>
 
           {isMounted && !isTablet && <Details post={post} />}

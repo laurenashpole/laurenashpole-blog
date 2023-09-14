@@ -17,9 +17,9 @@ const MediaBlock = ({ post }) => {
         </div>
       }
 
-      {post.video && post.video.youtube &&
+      {post.video_id && post.video_type === 'youtube' &&
         <div className="media__content media__content--video">
-          <iframe width="700" height="383" src={`https://www.youtube.com/embed/${post.video.youtube.video_id}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+          <iframe width="700" height="383" src={`https://www.youtube.com/embed/${post.video_id}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
         </div>
       }
 

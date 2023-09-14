@@ -11,7 +11,7 @@ const client = createClient({
 });
 
 function getQuery (limit, page, id, tag) {
-  return `*[_type == 'post' && type == 'text' ${id ? ` && _id == '${id}'` : ''} ${tag ? ` && tag == '${tag}'` : ''}] | order(date desc) [${limit * (page - 1)}...${limit * page}] {
+  return `*[_type == 'post' && type == 'photo' ${id ? ` && _id == '${id}'` : ''} ${tag ? ` && tag == '${tag}'` : ''}] | order(date desc) [${limit * (page - 1)}...${limit * page}] {
     _id,
     type,
     title,
@@ -41,8 +41,15 @@ function getQuery (limit, page, id, tag) {
       },
       markDefs,
       listItem,
-      level
-    }
+      level,
+    },
+    video_type,
+    video_id,
+    thumbnail_url,
+    answer,
+    asking_name,
+    asking_url,
+    question,
   }`;
 }
 
@@ -70,6 +77,9 @@ function getHtml (body) {
 }
 
 async function getPosts (limit, page, id, tag) {
+  const total = await client.fetch(`count(*[_type == 'post'])`);
+  console.log("TOTAL", total);
+
   return (await client.fetch(getQuery(limit, page, id, tag))).map((post) => ({
     ...post,
     html: getHtml(post.body),
@@ -77,7 +87,7 @@ async function getPosts (limit, page, id, tag) {
   }));
 }
 
-export async function find (limit = 10, page = 5, id, tag) {
+export async function find (limit = 10, page = 1, id, tag) {
   return {
     posts: await getPosts(limit, page, id, tag)
   };
