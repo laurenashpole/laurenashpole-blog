@@ -11,7 +11,7 @@ const client = createClient({
 });
 
 function getQuery (limit, page, id, tag) {
-  return `*[_type == 'post'${id ? ` && _id == '${id}'` : ''} ${tag ? ` && tag == '${tag}'` : ''}] | order(date desc) [${limit * (page - 1)}...${limit * page}] {
+  return `*[_type == 'post'${id ? ` && _id == '${id}'` : ''} ${tag ? ` && '${tag}' in tags` : ''}] | order(date desc)${limit ? `[${limit * (page - 1)}...${limit * page}]` : ''} {
     _id,
     type,
     title,

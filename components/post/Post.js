@@ -9,7 +9,6 @@ import TextBlock from './TextBlock';
 import MediaBlock from './MediaBlock';
 import LinkBlock from './LinkBlock';
 import AnswerBlock from './AnswerBlock';
-import Notes from './Notes';
 import Comments from './Comments';
 import styles from './Post.styles.js';
 
