@@ -57,12 +57,7 @@ const Post = ({ post, isPermalink }) => {
           }
         </Well>
 
-        {isPermalink &&
-          <>
-            {/*{post.note_count > 0 && <Notes post={post} />}*/}
-            <Comments />
-          </>
-        }
+        {isPermalink && <Comments />}
       </div>
 
       <style jsx global>

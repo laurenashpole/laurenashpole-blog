@@ -27,7 +27,6 @@
     "react-responsive": "^8.2.0",
     "sass": "^1.66.1",
     "styled-jsx-plugin-sass": "^1.0.0",
-    "tumblr.js": "^3.0.0",
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
