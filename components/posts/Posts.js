@@ -8,7 +8,7 @@ const Posts = ({ posts, totalPosts, pagination, paginationPath, heading }) => {
     <>
       <div>
         {heading && <h1 className="posts__heading" dangerouslySetInnerHTML={{ __html: heading}} />}
-        {posts.map((post) => <Post key={post.id} post={post} />)}
+        {posts.map((post) => <Post key={post._id} post={post} />)}
       </div>
 
       {pagination &&

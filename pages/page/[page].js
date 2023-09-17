@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { find } from '../../utils/tumblr';
+import { find } from '../../utils/sanity';
 import Layout from '../../components/layout/Layout';
 import Posts from '../../components/posts/Posts';
 
@@ -21,7 +21,7 @@ export async function getStaticPaths () {
 }
 
 export async function getStaticProps ({ params }) {
-  const response = await find(10, parseInt(params.page), null);
+  const response = await find(10, parseInt(params.page));
 
   if (Math.max(response.total_posts / 10) > parseInt(params.page) || !(response.posts || []).length) {
     return { notFound: true };

@@ -9,7 +9,6 @@ import TextBlock from './TextBlock';
 import MediaBlock from './MediaBlock';
 import LinkBlock from './LinkBlock';
 import AnswerBlock from './AnswerBlock';
-import Notes from './Notes';
 import Comments from './Comments';
 import styles from './Post.styles.js';
 
@@ -42,9 +41,7 @@ const Post = ({ post, isPermalink }) => {
           <div className="post__body">
             {post.type === 'text' && <TextBlock post={post} />}
             {post.type === 'photo' && <MediaBlock post={post} />}
-            {post.type === 'photoset' && <MediaBlock post={post} />}
             {post.type === 'video' && <MediaBlock post={post} />}
-            {post.type === 'audio' && <div />}
             {post.type === 'link' && <LinkBlock post={post} />}
             {post.type === 'answer' && <AnswerBlock post={post} />}
           </div>
@@ -60,12 +57,7 @@ const Post = ({ post, isPermalink }) => {
           }
         </Well>
 
-        {isPermalink &&
-          <>
-            {post.note_count > 0 && <Notes post={post} />}
-            <Comments />
-          </>
-        }
+        {isPermalink && <Comments />}
       </div>
 
       <style jsx global>

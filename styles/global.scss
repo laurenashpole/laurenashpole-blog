@@ -6,7 +6,7 @@ h1 {
 }
 
 h2 {
-  margin-top: 0;
+  margin: 0;
   font-weight:  900;
 
   a {
@@ -14,6 +14,11 @@ h2 {
     font-weight: inherit;
   }
 }
+
+h2:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+
 
 figure {
   margin: 0;
@@ -26,15 +31,20 @@ blockquote {
 }
 
 pre {
-  background: #fafafa !important;
-  margin: 2.5rem 0;
+  background: #fafafa;
+  margin: 3.5rem 0 0 0;
   border-radius: 3px;
-  padding: 1.5rem !important;
-  font-size: 2rem !important;
+  padding: 1.5rem;
+  font-size: 2rem;
+  overflow: auto;
+}
+
+pre:not(:last-child) {
+  margin-bottom: 3.5rem;
 }
 
 hr {
-  margin: 4rem 0 3rem 0;
+  margin: 4rem 0;
   border: none;
   border-top: 1px solid $color-gray-light;
 }
@@ -45,8 +55,11 @@ hr {
   }
 
   h2 {
-    margin-bottom: 3rem;
     font-size: 4rem;
+  }
+
+  h2:not(:last-child) {
+    margin-bottom: 3rem;
   }
 
   blockquote {
@@ -55,8 +68,12 @@ hr {
   }
 
   pre {
-    margin: 3rem 0;
-    padding: 3rem !important;
+    margin: 4rem 0 0 0;
+    padding: 3rem;
+  }
+
+  pre:not(:last-child) {
+    margin-bottom: 4rem;
   }
 
   .well__section:first-child .post__body h3 {
@@ -72,8 +89,11 @@ hr {
   }
 
   h2 {
-    margin-bottom: 4rem;
     font-size: 4.5rem;
+  }
+
+  h2:not(:last-child) {
+    margin-bottom: 4rem;
   }
 
   blockquote {
@@ -82,11 +102,15 @@ hr {
   }
 
   pre {
-    margin: 4rem 0;
+    margin: 5rem 0 0 0;
+  }
+
+  pre:not(:last-child) {
+    margin-bottom: 5rem;
   }
 
   hr {
-    margin: 7rem 0 6rem 0;
+    margin: 6rem 0;
   }
 
   .well__section:first-child .post__body h3 {

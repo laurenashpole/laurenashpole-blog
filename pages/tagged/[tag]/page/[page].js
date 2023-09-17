@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { find } from '../../../../utils/tumblr';
+import { find } from '../../../../utils/sanity';
 import Layout from '../../../../components/layout/Layout';
 import Posts from '../../../../components/posts/Posts';
 

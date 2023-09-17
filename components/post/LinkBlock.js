@@ -6,7 +6,7 @@ const LinkBlock = ({ post }) => {
     <div className="link">
       <h2><a className="link__link" href={post.url}>{post.title}</a></h2>
       {post.excerpt && <blockquote>{post.excerpt}...</blockquote>}
-      <div dangerouslySetInnerHTML={{ __html: post.description }} />
+      {post.description && <div dangerouslySetInnerHTML={{ __html: post.description }} />}
 
       <style jsx global>
         {styles}

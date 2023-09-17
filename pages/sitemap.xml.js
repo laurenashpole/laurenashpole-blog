@@ -1,10 +1,10 @@
-import { findAll } from '../utils/tumblr';
+import { find } from '../utils/sanity';
 import { FEATURED_TAGS } from '../constants/featuredTags';
 
 const Sitemap = () => {};
 
 export async function getServerSideProps ({ res }) {
-  const response = await findAll();
+  const response = await find(null);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
@@ -16,7 +16,7 @@ export async function getServerSideProps ({ res }) {
 
       ${response.posts.map((post) => `
         <url>
-          <loc>${process.env.NEXT_PUBLIC_BASE_URL}${new URL(post.post_url).pathname}</loc>
+          <loc>${process.env.NEXT_PUBLIC_BASE_URL}${post.pathname}</loc>
           <lastmod>${new Date(post.date).toISOString().substring(0, 10)}</lastmod>
         </url>
       `).join('')}

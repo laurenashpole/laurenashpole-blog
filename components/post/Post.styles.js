@@ -11,7 +11,19 @@ export default css.global`
     padding-bottom: 1rem;
 
     img {
-      margin: 0 auto 3rem auto;
+      margin: 0 auto;
+    }
+
+    img:not(:last-child) {
+      margin-bottom: 3rem;
+    }
+
+    img + img {
+      margin-top: -2rem;
+    }
+
+    p + img {
+      margin-top: 3rem;
     }
 
     ol,
@@ -26,6 +38,10 @@ export default css.global`
       li {
         padding-left: 0.75rem;
       }
+    }
+
+    li > ul {
+      margin-top: 1.25rem;
     }
 
     ol:not(:last-child),
@@ -68,8 +84,16 @@ export default css.global`
     }
 
     .post__body {
-      img {
+      img:not(:last-child) {
         margin-bottom: 4rem;
+      }
+
+      img + img {
+        margin-top: -3rem;
+      }
+
+      p + img {
+        margin-top: 4rem;
       }
 
       ol,
@@ -113,11 +137,19 @@ export default css.global`
     }
 
     .post__body {
-      img {
+      img:not(:last-child) {
         margin-bottom: 6rem;
       }
 
-      h2 {
+      img + img {
+        margin-top: -5rem;
+      }
+
+      p + img {
+        margin-top: 6rem;
+      }
+
+      h2:not(:last-child) {
         margin-bottom: 6rem;
       }
 
