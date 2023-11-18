@@ -12,44 +12,20 @@ const client = createClient({
 
 function getQuery (limit, page, id, tag) {
   return `*[_type == 'post' && state == 'published'${id ? ` && _id == '${id}'` : ''} ${tag ? ` && '${tag}' in tags` : ''}] | order(date desc)${limit ? `[${limit * (page - 1)}...${limit * page}]` : ''} {
-    _id,
-    type,
-    title,
+    ...,
     "slug": slug.current,
     "pathname": pathname.current,
-    date,
-    tags,
-    summary,
-    url,
-    excerpt,
-    description,
     "photos": photos[] {
       "url": asset->url,
       alt
     },
-    caption,
     "body": body[] {
-      _type,
-      _key,
-      style,
-      children,
-      code,
-      language,
+      ...,
       "image": {
         "url": asset->url,
         alt
-      },
-      markDefs,
-      listItem,
-      level,
-    },
-    video_type,
-    video_id,
-    thumbnail_url,
-    answer,
-    asking_name,
-    asking_url,
-    question,
+      }
+    }
   }`;
 }
 
@@ -104,9 +80,29 @@ async function getPosts (limit, page, id, tag) {
   });
 }
 
+async function getAffiliate () {
+  const affiliates = await client.fetch(
+    `*[_type == 'affiliate' && is_active] {
+      ...,
+      banner {
+        ...,
+        mobile {
+          "url": asset->url
+        },
+        desktop {
+          "url": asset->url
+        }
+      }
+    }`
+  );
+
+  return affiliates.length ? affiliates[Math.floor(Math.random() * affiliates.length)] : {};
+}
+
 export async function find (limit = 10, page = 1, id, tag) {
   return {
     posts: await getPosts(limit, page, id, tag),
-    pagination: await getPagination(limit, page)
+    pagination: await getPagination(limit, page),
+    affiliate: await getAffiliate()
   };
 }

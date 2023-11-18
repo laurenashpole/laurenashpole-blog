@@ -1,18 +1,26 @@
+import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Post from '../post/Post';
 import Pagination from './Pagination';
+import Affiliate from '../affiliate/Affiliate';
 import styles from './Posts.styles.js';
 
-const Posts = ({ posts, totalPosts, pagination, paginationPath, heading }) => {
+const Posts = ({ posts, pagination, paginationPath, heading, affiliate }) => {
   return (
     <>
       <div>
         {heading && <h1 className="posts__heading" dangerouslySetInnerHTML={{ __html: heading}} />}
-        {posts.map((post) => <Post key={post._id} post={post} />)}
+
+        {posts.map((post, i) => (
+          <Fragment key={post._id}>
+            <Post post={post} />
+            {i === 4 && <Affiliate affiliate={affiliate} /> }
+          </Fragment>
+        ))}
       </div>
 
       {pagination &&
-        <Pagination totalPosts={totalPosts} pagination={pagination} paginationPath={paginationPath} />
+        <Pagination pagination={pagination} paginationPath={paginationPath} />
       }
 
       <style jsx global>
@@ -24,9 +32,9 @@ const Posts = ({ posts, totalPosts, pagination, paginationPath, heading }) => {
 
 Posts.propTypes = {
   posts: PropTypes.array,
-  totalPosts: PropTypes.number,
   pagination: PropTypes.object,
-  paginationPath: PropTypes.string
+  paginationPath: PropTypes.string,
+  affiliate: PropTypes.object
 };
 
 export default Posts;
