@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './Affiliate.styles.js';
 
 const Affiliate = ({ affiliate }) => {
-  if (!affiliate.banner && !affiliate.snippet) {
+  if (!affiliate || !affiliate.banner || !affiliate.snippet) {
     return null;
   }
 
