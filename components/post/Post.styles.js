@@ -119,7 +119,7 @@ export default css.global`
   @media (min-width: $break-desktop) {
     .post .well:first-child {
       &:not(:last-child) {
-        margin-bottom: 12rem;
+        margin-bottom: 8rem;
       }
 
       .well__section {

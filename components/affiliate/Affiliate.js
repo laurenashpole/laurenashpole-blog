@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import styles from './Affiliate.styles.js';
 
-const Affiliate = ({ affiliate }) => {
-  if (!affiliate || !affiliate.banner || !affiliate.snippet) {
+const Affiliate = ({ affiliate, isPermalink }) => {
+  if (!affiliate || (!affiliate.banner && !affiliate.snippet)) {
     return null;
   }
 
   return (
-    <div className="affiliate">
+    <div className={`affiliate ${isPermalink ? 'affiliate--permalink' : ''}`}>
       <div className="affiliate__mobile">
         {affiliate.banner &&
           <a href={affiliate.banner.url}>
@@ -42,7 +42,8 @@ const Affiliate = ({ affiliate }) => {
 };
 
 Affiliate.propTypes = {
-  affiliate: PropTypes.object
+  affiliate: PropTypes.object,
+  isPermalink: PropTypes.boolean
 };
 
 export default Affiliate;

@@ -3,10 +3,10 @@ import { find } from '../../../../utils/sanity';
 import Layout from '../../../../components/layout/Layout';
 import Posts from '../../../../components/posts/Posts';
 
-const Index = ({ posts, pagination, page, tag }) => {
+const Index = ({ posts, pagination, page, tag, affiliate }) => {
   return (
     <Layout meta={{ title: `Posts tagged ${tag} – page ${page}`, pathname: `/tagged/${(tag || '').replace(/ /g, '+')}/page/${page}` }}>
-      <Posts posts={posts} heading={`Posts tagged ${tag} <br />– page ${page}`} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} />
+      <Posts posts={posts} heading={`Posts tagged ${tag} <br />– page ${page}`} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} affiliate={affiliate} />
     </Layout>
   );
 };
@@ -36,7 +36,8 @@ Index.propTypes = {
   posts: PropTypes.array,
   pagination: PropTypes.object,
   tag: PropTypes.string,
-  page: PropTypes.string
+  page: PropTypes.string,
+  affiliate: PropTypes.object
 };
 
 export default Index;
