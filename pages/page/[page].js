@@ -3,10 +3,10 @@ import { find } from '../../utils/sanity';
 import Layout from '../../components/layout/Layout';
 import Posts from '../../components/posts/Posts';
 
-const Index = ({ posts, pagination, page }) => {
+const Index = ({ posts, pagination, page, affiliate }) => {
   return (
     <Layout meta={{ title: `Page ${page}`, pathname: `/page/${page}` }}>
-      <Posts posts={posts} heading={`Page ${page}`} pagination={pagination} />
+      <Posts posts={posts} heading={`Page ${page}`} pagination={pagination} affiliate={affiliate} />
     </Layout>
   );
 };
@@ -36,7 +36,8 @@ export async function getStaticProps ({ params }) {
 Index.propTypes = {
   posts: PropTypes.array,
   pagination: PropTypes.object,
-  page: PropTypes.string
+  page: PropTypes.string,
+  affiliate: PropTypes.object
 };
 
 export default Index;

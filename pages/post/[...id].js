@@ -3,7 +3,7 @@ import { find } from '../../utils/sanity';
 import Layout from '../../components/layout/Layout';
 import Post from '../../components/post/Post';
 
-const Show = ({ post }) => {
+const Show = ({ post, affiliate }) => {
   const formattedDate = new Date(post.date.replace(/-/g, '/')).toLocaleDateString('fr-CA', {
     year: 'numeric',
     month: '2-digit',
@@ -38,7 +38,7 @@ const Show = ({ post }) => {
 
   return (
     <Layout meta={{ title: post.headline || post.summary || '', pathname: post.pathname, twitter: { card: 'summary_large_image', image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image?headline=${post.headline || post.summary}&type=${post.type}` }, og: { type: 'article', image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image?headline=${post.headline || post.summary}&type=${post.type}` }, structuredData }}>
-      <Post post={post} isPermalink={true} />
+      <Post post={post} isPermalink={true} affiliate={affiliate} />
     </Layout>
   );
 };
@@ -64,14 +64,16 @@ export async function getStaticProps ({ params }) {
 
   return {
     props: {
-      post: response.posts[0]
+      post: response.posts[0],
+      affiliate: response.affiliate
     },
     revalidate: 3600
   };
 }
 
 Show.propTypes = {
-  post: PropTypes.object
+  post: PropTypes.object,
+  affiliate: PropTypes.object
 };
 
 export default Show;

@@ -9,10 +9,11 @@ import TextBlock from './TextBlock';
 import MediaBlock from './MediaBlock';
 import LinkBlock from './LinkBlock';
 import AnswerBlock from './AnswerBlock';
+import Affiliate from '../affiliate/Affiliate';
 import Comments from './Comments';
 import styles from './Post.styles.js';
 
-const Post = ({ post, isPermalink }) => {
+const Post = ({ post, isPermalink, affiliate }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const isTablet = useMediaQuery({
@@ -57,7 +58,12 @@ const Post = ({ post, isPermalink }) => {
           }
         </Well>
 
-        {isPermalink && <Comments />}
+        {isPermalink && (
+          <>
+            <Affiliate affiliate={affiliate} isPermalink={isPermalink} />
+            <Comments />
+          </>
+        )}
       </div>
 
       <style jsx global>
@@ -69,7 +75,8 @@ const Post = ({ post, isPermalink }) => {
 
 Post.propTypes = {
   post: PropTypes.object,
-  isPermalink: PropTypes.bool
+  isPermalink: PropTypes.bool,
+  affiliate: PropTypes.object
 };
 
 export default Post;

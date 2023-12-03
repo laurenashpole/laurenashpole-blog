@@ -4,10 +4,10 @@ import { find } from '../../utils/sanity';
 import Layout from '../../components/layout/Layout';
 import Posts from '../../components/posts/Posts';
 
-const Index = ({ posts, pagination, tag }) => {
+const Index = ({ posts, pagination, tag, affiliate }) => {
   return (
     <Layout meta={{ title: `Posts tagged ${tag}`, pathname: `/tagged/${(tag || '').replace(/ /g, '-')}` }}>
-      <Posts posts={posts} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} heading={`Posts tagged ${tag}`} />
+      <Posts posts={posts} pagination={pagination} paginationPath={`/tagged/${(tag || '').replace(/ /g, '+')}`} heading={`Posts tagged ${tag}`} affiliate={affiliate} />
     </Layout>
   );
 };
@@ -38,7 +38,8 @@ export async function getStaticProps ({ params }) {
 Index.propTypes = {
   posts: PropTypes.array,
   pagination: PropTypes.object,
-  tag: PropTypes.string
+  tag: PropTypes.string,
+  affiliate: PropTypes.object
 };
 
 export default Index;
