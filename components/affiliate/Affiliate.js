@@ -2,42 +2,52 @@ import PropTypes from 'prop-types';
 import styles from './Affiliate.styles.js';
 
 const Affiliate = ({ affiliate }) => {
-  if (!affiliate || !affiliate.banner || !affiliate.snippet) {
+  if (!affiliate) {
     return null;
   }
 
   return (
-    <div className="affiliate">
-      <div className="affiliate__mobile">
-        {affiliate.banner &&
-          <a href={affiliate.banner.url}>
-            <img alt={affiliate.banner.alt || ''} src={affiliate.banner.mobile.url} />
-          </a>
-        }
+    <>
+      {(affiliate.banner && affiliate.banner.mobile || affiliate.snippet && affiliate.snippet.mobile) &&
+        <div className="affiliate affiliate--mobile">
+          <div className="affiliate__banner--mobile">
+            {affiliate.banner &&
+              <a href={affiliate.banner.url}>
+                <img alt={affiliate.banner.alt || ''} src={affiliate.banner.mobile.url} />
+              </a>
+            }
 
-        {affiliate.snippet &&
-          <div dangerouslySetInnerHTML={{ __html: affiliate.snippet.mobile }} />
-        }
-      </div>
+            {affiliate.snippet &&
+              <div dangerouslySetInnerHTML={{ __html: affiliate.snippet.mobile }} />
+            }
+          </div>
 
-      <div className="affiliate__desktop">
-        {affiliate.banner &&
-          <a href={affiliate.banner.url}>
-            <img alt={affiliate.banner.alt || ''} src={affiliate.banner.desktop.url} />
-          </a>
-        }
+          <div className="affiliate__text">Advertisement</div>
+        </div>
+      }
 
-        {affiliate.snippet &&
-          <div dangerouslySetInnerHTML={{ __html: affiliate.snippet.desktop }} />
-        }
-      </div>
+      {((affiliate.banner && affiliate.banner.desktop) || (affiliate.snippet && affiliate.snippet.desktop)) &&
+        <div className="affiliate affiliate--desktop">
+          <div className="affiliate__banner--desktop">
+            {affiliate.banner &&
+              <a href={affiliate.banner.url}>
+                <img alt={affiliate.banner.alt || ''} src={affiliate.banner.desktop.url} />
+              </a>
+            }
 
-      <div className="affiliate__text">Advertisement</div>
+            {affiliate.snippet &&
+              <div dangerouslySetInnerHTML={{ __html: affiliate.snippet.desktop }} />
+            }
+          </div>
+
+          <div className="affiliate__text">Advertisement</div>
+        </div>
+      }
 
       <style jsx global>
         {styles}
       </style>
-    </div>
+    </>
   );
 };
 

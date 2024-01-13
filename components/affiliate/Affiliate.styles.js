@@ -11,13 +11,13 @@ export default css.global`
     align-items: center;
   }
 
-  .affiliate__mobile {
-    max-width: 300px;
-    min-height: 250px;
+  .affiliate--desktop {
+    display: none;
   }
 
-  .affiliate__desktop {
-    display: none;
+  .affiliate__banner--mobile {
+    max-width: 300px;
+    min-height: 250px;
   }
 
   .affiliate__text {
@@ -37,14 +37,17 @@ export default css.global`
   }
 
   @media (min-width: $break-desktop) {
-    .affiliate__mobile {
+    .affiliate--mobile {
       display: none;
     }
 
-    .affiliate__desktop {
+    .affiliate--desktop {
+      display: flex;
+    }
+
+    .affiliate__banner--desktop {
       max-width: 728px;
       min-height: 90px;
-      display: block;
     }
   }
 `;

@@ -75,7 +75,6 @@ async function getPosts (limit, page, id, tag) {
       ...post,
       html,
       preview: id ? null : getPreview(html),
-      pathname: `${post.pathname}${post.slug ? `/${post.slug}` : ''}`
     };
   });
 }
