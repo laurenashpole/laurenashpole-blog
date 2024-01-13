@@ -6,9 +6,14 @@ export default css.global`
 
   .affiliate {
     margin-bottom: 4rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .affiliate--permalink {
+    padding-top: 5rem;
   }
 
   .affiliate--desktop {
@@ -33,6 +38,11 @@ export default css.global`
     .affiliate {
       margin-left: 25%;
       margin-bottom: 8rem;
+      padding-top: 2rem;
+    }
+
+    .affiliate--permalink {
+      margin-left: 0;
     }
   }
 
