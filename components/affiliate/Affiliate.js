@@ -53,7 +53,7 @@ const Affiliate = ({ affiliate, isPermalink }) => {
 
 Affiliate.propTypes = {
   affiliate: PropTypes.object,
-  isPermalink: PropTypes.boolean
+  isPermalink: PropTypes.bool
 };
 
 export default Affiliate;

@@ -43,6 +43,7 @@ export default css.global`
 
     .affiliate--permalink {
       margin-left: 0;
+      padding-top: 8rem;
     }
   }
 

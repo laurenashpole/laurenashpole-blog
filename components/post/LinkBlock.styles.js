@@ -11,6 +11,10 @@ export default css.global`
     display: inline-block;
   }
 
+  .link__link--podcast {
+    background: url(podcast($color-purple-encoded)) no-repeat left center;
+  }
+
   @media (min-width: $break-tablet) {
     .link__link {
       background-size: 5rem;
