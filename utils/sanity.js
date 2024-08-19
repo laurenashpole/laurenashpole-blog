@@ -24,6 +24,9 @@ function getQuery (limit, page, id, tag) {
       "image": {
         "url": asset->url,
         alt
+      },
+      "file": {
+        "url": asset->url,
       }
     }
   }`;
@@ -47,6 +50,7 @@ function getHtml (body) {
       types: {
         code: ({ value }) => `<pre><code class="${value.language || 'javascript'}">${Prism.highlight(value.code, Prism.languages[value.language || 'javascript'], value.language || 'javascript')}</code></pre>`,
         image: ({ value }) => `<img${value.image.alt ? ` alt="${value.image.alt}"` : ''} src="${value.image.url}" />`,
+        download: ({ value }) => `<p><a href="${value.file.url}?dl=">${value.linkText || 'Download'}</a></p>`
       }
     }
   });
