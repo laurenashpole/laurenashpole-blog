@@ -37,7 +37,20 @@ const Show = ({ post, affiliate }) => {
   `;
 
   return (
-    <Layout meta={{ title: post.headline || post.summary || '', pathname: post.pathname, twitter: { card: 'summary_large_image', image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image?headline=${post.headline || post.summary}&type=${post.type}` }, og: { type: 'article', image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image?headline=${post.headline || post.summary}&type=${post.type}` }, structuredData }}>
+    <Layout meta={{
+      title: post.headline || post.summary || '',
+      pathname: post.pathname,
+      canonicalUrl: post.canonical_url,
+      twitter: {
+        card: 'summary_large_image',
+        image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image?headline=${post.headline || post.summary}&type=${post.type}`
+      },
+      og: {
+        type: 'article',
+        image: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image?headline=${post.headline || post.summary}&type=${post.type}`
+      },
+      structuredData
+    }}>
       <Post post={post} isPermalink={true} affiliate={affiliate} />
     </Layout>
   );
