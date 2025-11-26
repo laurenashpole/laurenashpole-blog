@@ -3,8 +3,9 @@ import css from 'styled-jsx/css';
 export default css.global`
   @import 'variables.scss';
 
-  .post:not(:last-child) {
-    margin-bottom: 4rem;
+  .post {
+    border-top: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-gray-light;
   }
 
   .post__body {
@@ -66,21 +67,25 @@ export default css.global`
 
   @media (min-width: $break-tablet) {
     .post {
-      display: flex;
-
       &:not(:last-child) {
         margin-bottom: 8rem;
       }
     }
 
+    .post__container {
+      display: flex;
+    }
+
     .post__details {
-      width: 25%;
+      // width: 25%;
+      min-width: calc(8.5rem * 5);
+      border-right: 1px solid $color-gray-light;
       padding: 5rem 4rem 0 0;
       flex-shrink: 0;
     }
 
     .post__content {
-      width: 75%;
+      // width: 75%;
     }
 
     .post__body {
@@ -133,10 +138,36 @@ export default css.global`
     }
 
     .post__details {
+      // background: $color-gray-lightest;
+      // background:
+      //   repeating-linear-gradient(
+      //     $color-white 0,
+      //     $color-white 6px,
+      //     transparent 6px,
+      //     transparent 10px,
+      //   ),
+      //   repeating-linear-gradient(
+      //     90deg,
+      //     transparent 0,
+      //     transparent calc(4.25rem - 1px),
+      //     $color-gray-light calc(4.25rem - 1px),
+      //     $color-gray-light 4.25rem,
+      //   );
+
+      background-image: 
+        linear-gradient($color-gray-light 1px, transparent 1px),
+        linear-gradient(90deg, $color-gray-light 1px, transparent 1px);
+      background-size: 4.25rem 4.25rem;
+      margin: -1px;
+
+      // margin: -1px;
+      // margin: 0 -1px 0 0;
       padding: 7.5rem 6rem 0 0;
     }
 
     .post__body {
+      padding: 8.5rem;
+
       img:not(:last-child) {
         margin-bottom: 6rem;
       }
