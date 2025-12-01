@@ -7,7 +7,7 @@ const client = createClient({
   projectId: process.env.SANITY_PROJECT,
   dataset: 'production',
   apiVersion: '2022-03-25',
-  useCdn: false
+  useCdn: true
 });
 
 function getQuery (limit, page, id, tag) {
