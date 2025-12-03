@@ -1,6 +1,6 @@
 import { InView } from 'react-intersection-observer';
-import Well from '../../shared/components/Well';
 import styles from './Comments.styles.js';
+import Container from '../../shared/components/Container.js';
 
 const Comments = () => {
   const handleInView = (inView) => {
@@ -13,23 +13,33 @@ const Comments = () => {
   };
 
   return (
-    <Well size="custom">
-      <InView threshold={1} triggerOnce={true} onChange={handleInView}>
-        <h3 className="comments__heading">Comments</h3>
-      </InView>
+    <>
+      <div className="comments">
+        <Container>
+          <div className="comments__content">
+            <div className="comments__aside" />
 
-      <>
-        <div id="disqus_thread" />
+            <div className="comments__main">
+              <InView threshold={1} triggerOnce={true} onChange={handleInView}>
+                <h3 className="comments__heading">Comments</h3>
+              </InView>
 
-        <noscript>
-          Please enable JavaScript to view the <a href='//disqus.com/?ref_noscript'>comments powered by Disqus.</a>
-        </noscript>
+              <>
+                <div id="disqus_thread" />
 
-        <style jsx global>
-          {styles}
-        </style>
-      </>
-    </Well>
+                <noscript>
+                  Please enable JavaScript to view the <a href='//disqus.com/?ref_noscript'>comments powered by Disqus.</a>
+                </noscript>
+              </>
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      <style jsx global>
+        {styles}
+      </style>
+    </>
   );
 };
 

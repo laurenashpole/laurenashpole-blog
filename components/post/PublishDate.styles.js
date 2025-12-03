@@ -4,6 +4,7 @@ export default css.global`
   @import 'variables.scss';
 
   .date {
+    margin-bottom: 2.625rem;
     color: $color-gray-darkest;
     font-size: 1.75rem;
     font-weight: 600;
@@ -19,7 +20,6 @@ export default css.global`
 
   @media (min-width: $break-tablet) {
     .date {
-      margin-bottom: 2.5rem;
       color: $color-purple;
       text-align: right;
 

@@ -25,7 +25,7 @@ const Post = ({ post, isPermalink, affiliate }) => {
   }, []);
 
   return (
-    <article className="post">
+    <article className={`post ${isPermalink ? 'post--permalink' : ''}`}>
       <Container>
         <div className="post__container">
           <div className="post__details">
@@ -57,16 +57,16 @@ const Post = ({ post, isPermalink, affiliate }) => {
                 </Link>
               </footer>
             }
-
-            {isPermalink && (
-              <>
-                <Affiliate affiliate={affiliate} isPermalink={isPermalink} />
-                <Comments />
-              </>
-            )}
           </div>
         </div>
       </Container>
+
+      {isPermalink && (
+        <>
+          <Affiliate affiliate={affiliate} isPermalink />
+          <Comments />
+        </>
+      )}
 
       <style jsx global>
         {styles}
