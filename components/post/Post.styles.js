@@ -3,27 +3,36 @@ import css from 'styled-jsx/css';
 export default css.global`
   @import 'variables.scss';
 
-  .post:not(:last-child) {
-    margin-bottom: 4rem;
+  .post:not(.post--permalink) {
+    border-bottom: 1px solid $color-gray-light;
+    border-top: 1px solid $color-gray-light;
+
+    & + .post {
+      margin-top: 7rem;
+    }
+  }
+
+  .post__content {
+    padding: 3.5rem 2.625rem;
   }
 
   .post__body {
-    padding-bottom: 1rem;
+    padding-bottom: 2.625rem;
 
     img {
       margin: 0 auto;
     }
 
     img:not(:last-child) {
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
     }
 
     img + img {
-      margin-top: -2rem;
+      margin-top: -2.625rem;
     }
 
     p + img {
-      margin-top: 3rem;
+      margin-top: 3.5rem;
     }
 
     ol,
@@ -46,7 +55,7 @@ export default css.global`
 
     ol:not(:last-child),
     ul:not(:last-child) {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.625rem;
     }
 
     li:not(:last-child) {
@@ -55,6 +64,7 @@ export default css.global`
   }
 
   .post__footer {
+    margin-top: 3.5rem;
     font-size: 1.75rem;
     text-transform: uppercase;
     letter-spacing: 0.075em;
@@ -65,22 +75,31 @@ export default css.global`
   }
 
   @media (min-width: $break-tablet) {
-    .post {
-      display: flex;
-
-      &:not(:last-child) {
-        margin-bottom: 8rem;
+    .post:not(.post--permalink) {
+      & + .post {
+        margin-top: 8.5rem;
       }
     }
 
+    .post__container {
+      display: flex;
+    }
+
     .post__details {
-      width: 25%;
-      padding: 5rem 4rem 0 0;
+      background-image: 
+        linear-gradient($color-gray-light 1px, transparent 1px),
+        linear-gradient(90deg, $color-gray-light 1px, transparent 1px);
+      background-size: 4.25rem 4.25rem;
+      width: calc(8.5rem * 3.5);
+      border-right: 1px solid $color-gray-light;
+      margin: -1px 0 -1px -1px;
+      padding: 5.25rem 3.75rem 0 0;
       flex-shrink: 0;
     }
 
     .post__content {
-      width: 75%;
+      width: calc(100% - (8.5rem * 3.5));
+      padding: 5.25rem 3.75rem;
     }
 
     .post__body {
@@ -110,30 +129,20 @@ export default css.global`
         padding-left: 1rem;
       }
     }
-
-    .post__footer {
-      margin: -1rem 0;
-    }
   }
 
   @media (min-width: $break-desktop) {
-    .post .well:first-child {
-      &:not(:last-child) {
-        margin-bottom: 8rem;
-      }
-
-      .well__section {
-        padding-left: 6rem;
-        padding-right: 6rem;
-
-        &:not(:nth-child(2)) {
-          padding: 6rem;
-        }
-      }
+    .post__details {
+      width: calc(8.5rem * 5);
     }
 
     .post__details {
-      padding: 7.5rem 6rem 0 0;
+      padding: 9.5rem 6rem;
+    }
+
+    .post__content {
+      width: calc(100% - (8.5rem * 5));
+      padding: 8.5rem;
     }
 
     .post__body {
@@ -166,7 +175,7 @@ export default css.global`
 
   @media (min-width: $break-desktop-large) {
     .post__details {
-      padding-right: 8rem;
+      padding-right: 8.5rem;
     }
   }
 `;

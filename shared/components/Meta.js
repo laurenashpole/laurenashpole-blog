@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 
-const Meta = ({ description, og, pathname, canonicalUrl, structuredData, title, twitter }) => {
+const Meta = ({ description, og, pathname, structuredData, title, twitter }) => {
   og = {
     type: 'website',
     site_name: 'Lauren Ashpole',
@@ -46,7 +46,7 @@ const Meta = ({ description, og, pathname, canonicalUrl, structuredData, title, 
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: data }} />
       ))}
 
-      <link rel="canonical" href={canonicalUrl ? canonicalUrl : `${process.env.NEXT_PUBLIC_BASE_URL}${pathname || ''}`} />
+      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_BASE_URL}${pathname || ''}`} />
     </Head>
   );
 };

@@ -4,7 +4,6 @@ export default css.global`
   @import 'variables.scss';
 
   .welcome {
-    margin-bottom: 3rem;
     text-align: center;
 
     .tags {
@@ -15,6 +14,11 @@ export default css.global`
         display: none;
       }
     }
+  }
+
+  .welcome__container {
+    background: $color-gray-lightest;
+    padding: 5.25rem 3.5rem;
   }
 
   .welcome__heading {
@@ -29,13 +33,8 @@ export default css.global`
 
   @media (min-width: $break-tablet) {
     .welcome {
-      margin: 0 0 5rem 25%;
-      text-align: left;
-
       .tags {
         max-width: 75rem;
-        margin-left: -1rem;
-        justify-content: flex-start;
 
         li:last-child {
           display: block;
@@ -43,12 +42,15 @@ export default css.global`
       }
     }
 
+    .welcome__container {
+      padding: 8.5rem;
+    }
+
     .welcome__heading {
       padding: 0 0 2rem 0;
     }
 
     p.welcome__text {
-      margin: 0 0 5rem 0;
       font-size: 2.25rem;
     }
   }

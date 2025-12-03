@@ -4,16 +4,16 @@ export default css.global`
   @import 'svgs.scss';
   @import 'variables.scss';
 
-  .affiliate {
-    margin-bottom: 4rem;
-    padding-top: 1rem;
+  .affiliate--permalink {
+    border-top: 1px solid $color-gray-light;
+  }
+
+  .affiliate__container {
+    background: $color-gray-lightest;
+    padding: 3.5rem 2.625rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .affiliate--permalink {
-    padding-top: 5rem;
   }
 
   .affiliate--desktop {
@@ -35,19 +35,16 @@ export default css.global`
   }
 
   @media (min-width: $break-tablet) {
-    .affiliate {
-      margin-left: 25%;
-      margin-bottom: 8rem;
-      padding-top: 2rem;
-    }
-
-    .affiliate--permalink {
-      margin-left: 0;
-      padding-top: 8rem;
+    .affiliate__container {
+      padding: 5.25rem 3.75rem;
     }
   }
 
   @media (min-width: $break-desktop) {
+    .affiliate__container {
+      padding: 8.5rem;
+    }
+
     .affiliate--mobile {
       display: none;
     }

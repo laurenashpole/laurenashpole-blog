@@ -4,7 +4,7 @@ export default css.global`
   @import 'variables.scss';
 
   .pagination {
-    margin-top: 4rem;
+    // margin-top: 4rem;
     display: flex;
     text-transform: uppercase;
     letter-spacing: 0.075em;
@@ -16,13 +16,13 @@ export default css.global`
 
   @media (min-width: $break-tablet) {
     .pagination {
-      margin: 7rem 0 0 25%;
+      // margin: 7rem 0 0 25%;
     }
   }
 
   @media (min-width: $break-desktop) {
-    .pagination {
-      margin-top: 9rem;
-    }
+    // .pagination {
+    //   margin-top: 9rem;
+    // }
   }
 `;

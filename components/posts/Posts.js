@@ -4,12 +4,19 @@ import Post from '../post/Post';
 import Pagination from './Pagination';
 import Affiliate from '../affiliate/Affiliate';
 import styles from './Posts.styles.js';
+import Container from '../../shared/components/Container.js';
 
 const Posts = ({ posts, pagination, paginationPath, heading, affiliate }) => {
   return (
     <>
       <div>
-        {heading && <h1 className="posts__heading" dangerouslySetInnerHTML={{ __html: heading}} />}
+        {heading && (
+          <div className="posts__heading">
+            <Container>
+              <h1 className="posts__heading-text" dangerouslySetInnerHTML={{ __html: heading}} />
+            </Container>
+          </div>
+        )}
 
         {posts.map((post, i) => (
           <Fragment key={post._id}>

@@ -5,41 +5,43 @@ export default css.global`
   @import 'svgs.scss';
 
   .posts__heading {
-    padding: 0 2rem;
     text-align: center;
+  }  
+
+  .posts__heading-text {
+    margin: 0;
+    padding: 5.25rem 3.5rem;
 
     &:after {
       content: '';
       background: url(abstract-line-hr($color-orange-encoded)) no-repeat;
       width: 4rem;
       height: 2rem;
-      margin: 1rem auto 4rem auto;
+      margin: 2.625rem auto 0 auto;
       display: block;
     }
   }
 
   @media (min-width: $break-tablet) {
-    .posts__heading {
-      margin-left: 25%;
-      padding: 0 8rem 0 0;
-      text-align: left;
+    .posts__heading-text {
+      padding: 6rem;
 
       &:after {
         width: 4.75rem;
         height: 2.25rem;
-        margin: 1.5rem 0 6rem 0;
+        margin: 3rem auto 0 auto;
       }
     }
   }
 
   @media (min-width: $break-desktop) {
-    .posts__heading {
-      padding: 0 12rem 0 0;
+    .posts__heading-text {
+      padding: 8.5rem;
 
       &:after {
         width: 5.5rem;
         height: 2.5rem;
-        margin: 2rem 0 8rem 0;
+        margin: 4.25rem auto 0 auto;
       }
     }
   }

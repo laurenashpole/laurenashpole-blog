@@ -4,16 +4,13 @@ export default css.global`
   @import 'variables.scss';
 
   .media__content {
-    width: calc(100% + 4rem);
-    margin: -2rem -2rem 3rem -2rem;
-  }
-
-  .media__content--img > div + div {
-    margin-top: -2rem;
+    width: calc(100% + 5.25rem);
+    margin: 0 -2.625rem;
+    padding-top: 0.875rem;
   }
 
   .media__content--video {
-    margin-bottom: 3rem;
+    margin-bottom: 3.75rem;
     padding-bottom: 56.25%;
     position: relative;
   }
@@ -30,6 +27,7 @@ export default css.global`
     .media__content {
       width: auto;
       margin: 0 auto;
+      padding: 0;
     }
 
     .media__content--img > div + div img {
